@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MachCtrl - Detalhes e Prints</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* CSS reaproveitado do covenant-cachyos.html para manter a identidade visual */
+    :root {
+      --bg: #0a0b0f;
+      --bg-elevated: #12141c;
+      --bg-card: #161922;
+      --bg-card-hover: #1c1f2b;
+      --border: #252836;
+      --border-subtle: #1e2130;
+      --text: #e8eaef;
+      --text-muted: #9aa3b5;
+      --text-dim: #6b7385;
+      --accent: #7c5cff;
+      --accent-soft: rgba(124, 92, 255, 0.15);
+      --accent-glow: rgba(124, 92, 255, 0.35);
+      --cyan: #22d3ee;
+      --cyan-soft: rgba(34, 211, 238, 0.12);
+      --green: #34d399;
+      --green-soft: rgba(52, 211, 153, 0.12);
+      --orange: #fb923c;
+      --orange-soft: rgba(251, 146, 60, 0.12);
+      --red: #f87171;
+      --radius: 14px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) var(--bg);
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% -10%, rgba(124, 92, 255, 0.18), transparent 50%),
+        radial-gradient(ellipse 60% 40% at 90% 10%, rgba(34, 211, 238, 0.08), transparent 45%),
+        radial-gradient(ellipse 50% 30% at 50% 100%, rgba(124, 92, 255, 0.06), transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(10, 11, 15, 0.75);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), #a78bfa);
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff 30%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-ghost {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--bg-card-hover);
+      border-color: #353849;
+    }
+
+    section {
+      padding: 40px 0 80px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    /* Galeria de imagens */
+    .gallery-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .gallery-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .gallery-item:hover {
+      border-color: #353849;
+      background: var(--bg-card-hover);
+    }
+
+    .gallery-item h3 {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .gallery-item p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+
+    .gallery-img-wrapper {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .gallery-img-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-img-wrapper:hover img {
+      transform: scale(1.02);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a href="covenant-cachyos.html" class="logo">
+        <span class="logo-mark">C</span>
+        Covenant CachyOS
+      </a>
+      <a href="covenant-cachyos.html" class="btn btn-ghost" style="font-size: 0.85rem; padding: 6px 14px;">← Voltar ao Início</a>
+    </div>
+  </nav>
+
+<header class="hero">
+    <div class="container">
+      <h1>MachCtrl 3.0</h1>
+      <p>
+        Monitor e Otimizador de Hardware para Linux — versão nativa com Rust + Tauri v2 + React.<br>
+        Visual dark/light moderno, backend Rust lendo os sensores direto de /proc e /sys (sem sysinfo, sem Electron, sem WebView pesado — usa o WebKitGTK do próprio sistema).
+      </p>
+
+      <ul style="text-align: left; max-width: 780px; margin: 0 auto; color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; padding-left: 20px;">
+        <li><strong style="color: var(--text);">Visão Geral</strong> — cards de CPU/Memória/GPU com gráficos ao vivo, Top Processos (RAM) e Rede</li>
+        <li><strong style="color: var(--text);">CPU</strong> — multi-socket (um card por CPU física), grid de núcleos com atividade + temperatura</li>
+        <li><strong style="color: var(--text);">Memória</strong> — uso + pentes DIMM (via dmidecode)</li>
+        <li><strong style="color: var(--text);">Discos</strong> — todas as partições com barra de uso</li>
+        <li><strong style="color: var(--text);">Fans</strong> — RPM/PWM com slider de controle e modo Auto</li>
+        <li><strong style="color: var(--text);">Energia</strong> — perfis Economia / Equilibrado / Desempenho</li>
+        <li><strong style="color: var(--text);">Limpeza</strong> — tarefas de limpeza do sistema</li>
+        <li><strong style="color: var(--text);">Ajuste</strong> — otimizações do sistema <em>(em construção)</em></li>
+      </ul>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="section-label">Interface</div>
+      <h2 class="section-title">Visão Detalhada</h2>
+
+      <div class="gallery-grid">
+        
+        <div class="gallery-item">
+          <h3>Visão Geral do Sistema</h3>
+          <p>Dashboard central com resumo da CPU, RAM, GPU, Rede e Top Processos. Ajusta-se perfeitamente a diferentes setups, desde notebooks até estações Xeon.</p>
+          <div class="gallery-img-wrapper">
+            <img src="images/Captura_de_tela_20261010_111819.png" alt="Visão Geral - Xeon" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <h3>Dashboard Alternativo (Notebook)</h3>
+          <p>Visão geral detalhando o estado da bateria, tensão e frequências de setups mais focados em eficiência.</p>
+          <div class="gallery-img-wrapper">
+            <img src="images/Captura_de_tela_20261010_111739.png" alt="Visão Geral - Inspiron" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <h3>Monitoramento de CPU Avançado</h3>
+          <p>Acompanhamento individual de uso, temperatura e frequência de cada thread e núcleo do processador.</p>
+          <div class="gallery-img-wrapper">
+            <img src="images/Captura_de_tela_20261010_111829.png" alt="Monitoramento de CPU" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <h3>Gestão de Memória</h3>
+          <p>Visualização dos pentes instalados, velocidade (MT/s), voltagem e slots disponíveis na placa-mãe.</p>
+          <div class="gallery-img-wrapper">
+            <img src="images/Captura_de_tela_20261010_111840.png" alt="Gestão de Memória" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <h3>Métricas de Armazenamento (Discos)</h3>
+          <p>Taxa de leitura e escrita em tempo real, capacidade total e sistemas de arquivos (F2FS, BTRFS, NTFS3, etc.) de todas as unidades mapeadas.</p>
+          <div class="gallery-img-wrapper">
+            <img src="images/Captura_de_tela_20261010_111849.png" alt="Métricas de Discos" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <h3>Perfis de Energia</h3>
+          <p>Ajuste simplificado para os modos de Desempenho, Equilibrado e Economia de Bateria com detalhamento de saúde das células.</p>
+          <div class="gallery-img-wrapper">
+            <img src="images/Captura_de_tela_20261010_111756.png" alt="Perfis de Energia" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <h3>Controle de Ventoinhas (Fans)</h3>
+          <p>Controle preciso de RPM com suporte a curvas customizadas e modos Automático, Manual e Máximo via PWM.</p>
+          <div class="gallery-img-wrapper">
+            <img src="images/Captura_de_tela_20261010_111856.png" alt="Controle de Ventoinhas" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <h3>Limpeza do Sistema</h3>
+          <p>Manutenção ágil para remover pacotes órfãos, esvaziar cache do Pacman, limpar logs do Journal e muito mais em um clique.</p>
+          <div class="gallery-img-wrapper">
+            <img src="images/Captura_de_tela_20261010_111907.png" alt="Limpeza do Sistema" loading="lazy" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      MachCtrl 3.0 — Desenvolvido para Arch
+    </div>
+  </footer>
+</body>
+</html>
