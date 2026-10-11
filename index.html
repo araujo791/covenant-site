@@ -682,6 +682,25 @@
       100% { opacity: 0.06; transform: scale(1.02); }
     }
 
+    /* Hero Video Embed */
+    .hero-video {
+      margin: 48px auto 0;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      background: var(--bg-card); /* Fundo caso o vídeo demore a carregar */
+    }
+
+    .hero-video iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: none;
+    }
+
   </style>
 </head>
 <body>
@@ -702,7 +721,7 @@
     </div>
   </nav>
 
-  <header class="hero">
+<header class="hero">
     <div class="container">
       <div class="badge">
         <span class="badge-dot"></span>
@@ -715,11 +734,20 @@
         <strong style="color: var(--text)">detecção automática de hardware</strong>
         — funcionam em qualquer máquina.
       </p>
+
+      <!-- Botões -->
       <div class="hero-actions">
         <a href="https://drive.google.com/file/d/1dfTVyEJx5HihAvUDdVc-VOMYW7gZpWbA/view?usp=sharing" id="btn-download" class="btn btn-primary" target="_blank" rel="noopener noreferrer">📥 Download</a>
         <a href="#uso" class="btn btn-ghost">Como usar</a>
         <a href="#otimizacoes" class="btn btn-ghost">Ver otimizações</a>
       </div>
+
+      <!-- Novo: Vídeo do YouTube Embutido -->
+      <div class="hero-video reveal-up delay-3">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Dfk93Atdj3I?si=CDuF2HIxKee4FfHu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+</iframe>
+      </div>
+
     </div>
   </header>
 
