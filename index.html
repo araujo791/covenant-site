@@ -54,7 +54,7 @@
       overflow-x: hidden;
     }
 
-    /* Background mesh */
+    /* Background mesh com leve animação */
     body::before {
       content: '';
       position: fixed;
@@ -65,6 +65,12 @@
         radial-gradient(ellipse 50% 30% at 50% 100%, rgba(124, 92, 255, 0.06), transparent 50%);
       pointer-events: none;
       z-index: 0;
+      animation: ambientGlow 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambientGlow {
+      0% { opacity: 0.8; }
+      100% { opacity: 1; transform: scale(1.05); }
     }
 
     .container {
@@ -74,6 +80,20 @@
       z-index: 1;
     }
 
+    /* Classes de Animação de Scroll */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
     /* Nav */
     nav {
       position: sticky;
@@ -82,6 +102,12 @@
       backdrop-filter: blur(16px);
       background: rgba(10, 11, 15, 0.75);
       border-bottom: 1px solid var(--border-subtle);
+      animation: slideDown 0.6s ease-out forwards;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
     }
 
     .nav-inner {
@@ -100,6 +126,11 @@
       letter-spacing: -0.02em;
       text-decoration: none;
       color: var(--text);
+      transition: transform 0.2s;
+    }
+
+    .logo:hover {
+      transform: scale(1.02);
     }
 
     .logo-mark {
@@ -148,11 +179,21 @@
       font-size: 1.2rem;
     }
 
-    /* Hero */
+    /* Hero Animations */
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .hero {
       padding: 100px 0 80px;
       text-align: center;
     }
+
+    .hero .badge { animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .hero h1 { animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+    .hero p { animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; }
+    .hero-actions { animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
 
     .badge {
       display: inline-flex;
@@ -179,8 +220,8 @@
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--green); }
+      50% { opacity: 0.4; box-shadow: 0 0 2px var(--green); }
     }
 
     .hero h1 {
@@ -219,7 +260,7 @@
       font-size: 0.95rem;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
       border: none;
       font-family: inherit;
@@ -232,8 +273,8 @@
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 28px var(--accent-glow);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px rgba(124, 92, 255, 0.5);
     }
 
     .btn-ghost {
@@ -245,6 +286,7 @@
     .btn-ghost:hover {
       background: var(--bg-card-hover);
       border-color: #353849;
+      transform: translateY(-2px);
     }
 
     /* Sections */
@@ -289,13 +331,14 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 28px;
-      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
     }
 
     .card:hover {
       border-color: #353849;
       background: var(--bg-card-hover);
-      transform: translateY(-2px);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     }
 
     .card-icon {
@@ -306,6 +349,11 @@
       place-items: center;
       font-size: 1.25rem;
       margin-bottom: 18px;
+      transition: transform 0.3s;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.1) rotate(5deg);
     }
 
     .card-icon.purple { background: var(--accent-soft); }
@@ -336,6 +384,11 @@
       font-size: 0.875rem;
       overflow-x: auto;
       position: relative;
+      transition: border-color 0.3s;
+    }
+
+    .code-block:hover {
+      border-color: var(--accent);
     }
 
     .code-block code {
@@ -372,6 +425,13 @@
       padding: 20px 0;
       border-bottom: 1px solid var(--border-subtle);
       position: relative;
+      transition: background 0.3s, padding-left 0.3s;
+      border-radius: var(--radius-sm);
+    }
+
+    .step:hover {
+      background: rgba(124, 92, 255, 0.03);
+      padding-left: 10px;
     }
 
     .step:last-child { border-bottom: none; }
@@ -388,6 +448,12 @@
       font-size: 0.9rem;
       color: #c4b5fd;
       flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+
+    .step:hover .step-num {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px var(--accent-glow);
     }
 
     .step h4 {
@@ -439,11 +505,11 @@
 
     .opt-panel.active {
       display: block;
-      animation: fadeIn 0.3s ease;
+      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -464,6 +530,12 @@
       padding: 14px 18px;
       font-size: 0.9rem;
       color: var(--text-muted);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .opt-list li:hover {
+      transform: translateX(4px);
+      border-color: var(--accent-soft);
     }
 
     .opt-list li::before {
@@ -521,6 +593,12 @@
       border-radius: var(--radius);
       padding: 32px;
       text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .status-box:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(52, 211, 153, 0.15);
     }
 
     .status-box h3 {
@@ -563,6 +641,47 @@
       .hero { padding: 64px 0 56px; }
       section { padding: 56px 0; }
     }
+
+    /* Fundo Fixo - Logo Mesclado (Covenant + MachCtrl) */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none; /* Garante que não bloqueie cliques nos botões */
+
+      /* Carrega as duas imagens */
+      background-image:
+        url('images/favicon.png'),
+        url('images/Covenant_boot.png');
+
+      /* Posiciona o ícone acima e o texto abaixo para formar um único logo */
+      background-position:
+        center calc(50% - 70px), /* Ícone centralizado, levemente para cima */
+        center calc(50% + 70px); /* Texto centralizado, levemente para baixo */
+
+      /* Define o tamanho proporcional de cada um */
+      background-size:
+        140px, /* Tamanho do favicon */
+        450px; /* Tamanho do texto Covenant */
+
+      background-repeat: no-repeat;
+
+      /* Deixa a imagem com tom de marca d'água (5% a 8% de visibilidade) */
+      opacity: 0.05;
+
+      /* Remove o fundo preto do Covenant_boot.png, mantendo apenas a parte clara */
+      mix-blend-mode: screen;
+
+      /* Opcional: animação suave acompanhando o mesh background */
+      animation: ambientLogo 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambientLogo {
+      0% { opacity: 0.03; transform: scale(1); }
+      100% { opacity: 0.06; transform: scale(1.02); }
+    }
+
   </style>
 </head>
 <body>
@@ -596,22 +715,22 @@
         <strong style="color: var(--text)">detecção automática de hardware</strong>
         — funcionam em qualquer máquina.
       </p>
-<div class="hero-actions">
-  <a href="https://drive.google.com/file/d/1dfTVyEJx5HihAvUDdVc-VOMYW7gZpWbA/view?usp=sharing" id="btn-download" class="btn btn-primary" target="_blank" rel="noopener noreferrer">📥 Download</a>
-  <a href="#uso" class="btn btn-ghost">Como usar</a>
-  <a href="#otimizacoes" class="btn btn-ghost">Ver otimizações</a>
-</div>
+      <div class="hero-actions">
+        <a href="https://drive.google.com/file/d/1dfTVyEJx5HihAvUDdVc-VOMYW7gZpWbA/view?usp=sharing" id="btn-download" class="btn btn-primary" target="_blank" rel="noopener noreferrer">📥 Download</a>
+        <a href="#uso" class="btn btn-ghost">Como usar</a>
+        <a href="#otimizacoes" class="btn btn-ghost">Ver otimizações</a>
+      </div>
     </div>
   </header>
 
   <!-- Uso -->
   <section id="uso">
     <div class="container">
-      <div class="section-label">Começar</div>
-      <h2 class="section-title">Como fazer o build</h2>
-      <p class="section-desc">Dois modos de build. O modo RAM é mais rápido, mas exige bastante memória livre.</p>
+      <div class="section-label reveal-up">Começar</div>
+      <h2 class="section-title reveal-up delay-1">Como fazer o build</h2>
+      <p class="section-desc reveal-up delay-2">Dois modos de build. O modo RAM é mais rápido, mas exige bastante memória livre.</p>
 
-      <div class="grid grid-2" style="margin-bottom: 24px;">
+      <div class="grid grid-2 reveal-up delay-3" style="margin-bottom: 24px;">
         <div>
           <div class="code-label">Build normal</div>
           <div class="code-block">
@@ -626,17 +745,17 @@
         </div>
       </div>
 
-      <div class="code-label">ISO gerada</div>
-      <div class="code-block" style="margin-bottom: 24px;">
+      <div class="code-label reveal-up delay-1">ISO gerada</div>
+      <div class="code-block reveal-up delay-1" style="margin-bottom: 24px;">
         <code>cachyos-live-iso/out/desktop/<span class="code-path">Covenant-CachyOS-*.iso</span></code>
       </div>
 
-      <div class="code-label">Gravar no pendrive</div>
-      <div class="code-block">
+      <div class="code-label reveal-up delay-2">Gravar no pendrive</div>
+      <div class="code-block reveal-up delay-2">
         <code><span class="code-cmd">sudo dd</span> if=<span class="code-path">'&lt;iso&gt;'</span> of=<span class="code-path">/dev/sdX</span> bs=4M status=progress oflag=sync</code>
       </div>
 
-      <div class="note" style="margin-top: 28px;">
+      <div class="note reveal-up delay-3" style="margin-top: 28px;">
         <strong>Nota:</strong> Esta versão é uma build <em>incremental e isolada</em> — começou 100% pura e cada customização foi reintroduzida e testada separadamente, para facilitar o diagnóstico (especialmente problemas de GPU/Wayland).
       </div>
     </div>
@@ -645,47 +764,47 @@
   <!-- O que o build faz -->
   <section id="build">
     <div class="container">
-      <div class="section-label">Pipeline</div>
-      <h2 class="section-title">O que o build faz</h2>
-      <p class="section-desc">Do zero até a ISO final, com retry automático e correções defensivas.</p>
+      <div class="section-label reveal-up">Pipeline</div>
+      <h2 class="section-title reveal-up delay-1">O que o build faz</h2>
+      <p class="section-desc reveal-up delay-2">Do zero até a ISO final, com retry automático e correções defensivas.</p>
 
       <div class="steps">
-        <div class="step">
+        <div class="step reveal-up">
           <div class="step-num">1</div>
           <div>
             <h4>Dependências e mirrors</h4>
             <p>Instala git, archiso e cachyos-rate-mirrors. Seleciona os mirrors mais rápidos e atualiza os bancos de pacotes.</p>
           </div>
         </div>
-        <div class="step">
+        <div class="step reveal-up delay-1">
           <div class="step-num">2</div>
           <div>
             <h4>Clone e patch do Calamares</h4>
             <p>Clona o cachyos-live-iso oficial e patcha o <code>calamares-online.sh</code> para não reinstalar o Calamares (causa raiz do instalador não abrir + perda de branding).</p>
           </div>
         </div>
-        <div class="step">
+        <div class="step reveal-up delay-2">
           <div class="step-num">3</div>
           <div>
             <h4>Pacotes e branding</h4>
             <p>Substitui a lista de pacotes, aplica branding Covenant (10 slides PNG), copia wallpapers e limpa o instalador para oferecer só Plasma e Hyprland.</p>
           </div>
         </div>
-        <div class="step">
+        <div class="step reveal-up delay-1">
           <div class="step-num">4</div>
           <div>
             <h4>Hooks de segurança</h4>
             <p>Cria hook do pacman que reaplica branding se o pacote for reinstalado. Adiciona IgnorePkg para cachyos-calamares-next. Injeta covenant-target-setup sem sobrescrever o upstream.</p>
           </div>
         </div>
-        <div class="step">
+        <div class="step reveal-up delay-2">
           <div class="step-num">5</div>
           <div>
             <h4>MachCtrl + auto-correção</h4>
             <p>Builda machctrl-bin a partir do AUR e embute na ISO. Verifica com ldd se o Calamares carrega todas as libs; se não, corrige boost-libs automaticamente via Arch Linux Archive.</p>
           </div>
         </div>
-        <div class="step">
+        <div class="step reveal-up delay-3">
           <div class="step-num">6</div>
           <div>
             <h4>ISO final</h4>
@@ -699,15 +818,15 @@
   <!-- Otimizações -->
   <section id="otimizacoes">
     <div class="container">
-      <div class="section-label">Performance</div>
-      <h2 class="section-title">Otimizações pós-instalação</h2>
-      <p class="section-desc">
+      <div class="section-label reveal-up">Performance</div>
+      <h2 class="section-title reveal-up delay-1">Otimizações pós-instalação</h2>
+      <p class="section-desc reveal-up delay-2">
         Rodam <strong style="color: var(--text)">apenas no sistema instalado</strong>, uma única vez no primeiro boot
         (<code style="font-family: var(--mono); font-size: 0.85rem; color: #c4b5fd;">covenant-first-boot.service</code>).
         Nunca na sessão live.
       </p>
 
-      <div class="opt-tabs" id="optTabs">
+      <div class="opt-tabs reveal-up delay-3" id="optTabs">
         <button class="opt-tab active" data-tab="cpu">CPU</button>
         <button class="opt-tab" data-tab="rede">Rede</button>
         <button class="opt-tab" data-tab="memoria">Memória</button>
@@ -718,7 +837,7 @@
         <button class="opt-tab" data-tab="outros">Outros</button>
       </div>
 
-      <div class="opt-panel active" id="panel-cpu">
+      <div class="opt-panel active reveal-up delay-3" id="panel-cpu">
         <ul class="opt-list">
           <li><span>Governor <strong>performance</strong> em todos os núcleos (também via <code>covenant-cpu-governor.service</code>)</span></li>
           <li><span>GPU forçada para <code>power_dpm_force_performance_level=high</code></span></li>
@@ -797,47 +916,47 @@
   <!-- Instalador -->
   <section id="instalador">
     <div class="container">
-      <div class="section-label">Calamares</div>
-      <h2 class="section-title">Instalador customizado</h2>
-      <p class="section-desc">Modo instalação online, com branding Covenant e seleção enxuta de desktops.</p>
+      <div class="section-label reveal-up">Calamares</div>
+      <h2 class="section-title reveal-up delay-1">Instalador customizado</h2>
+      <p class="section-desc reveal-up delay-2">Modo instalação online, com branding Covenant e seleção enxuta de desktops.</p>
 
       <div class="grid grid-3" style="margin-bottom: 32px;">
-        <div class="card">
+        <div class="card reveal-up delay-1">
           <div class="card-icon purple">🎨</div>
           <h3>Branding Covenant</h3>
           <p>10 slides PNG próprios durante a instalação, aplicados via staging neutro + reescrita do show.qml.</p>
         </div>
-        <div class="card">
+        <div class="card reveal-up delay-2">
           <div class="card-icon cyan">🖥️</div>
           <h3>Plasma + Hyprland</h3>
           <p>A tela de seleção oferece apenas “Sem Ambiente”, “Plasma Desktop” e “Hyprland”. Os demais desktops saem.</p>
         </div>
-        <div class="card">
+        <div class="card reveal-up delay-3">
           <div class="card-icon green">⚙️</div>
           <h3>Otimizações no target</h3>
           <p>covenant-target-setup injetado no shellprocess-before-online.conf, preservando o upstream do CachyOS.</p>
         </div>
       </div>
 
-      <h3 style="font-size: 1.15rem; margin-bottom: 16px; letter-spacing: -0.02em;">Por que o Calamares não abria</h3>
-      <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;">
+      <h3 class="reveal-up" style="font-size: 1.15rem; margin-bottom: 16px; letter-spacing: -0.02em;">Por que o Calamares não abria</h3>
+      <p class="reveal-up delay-1" style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;">
         O botão Launch Installer chamava <code style="font-family: var(--mono); font-size: 0.85rem; color: #c4b5fd;">calamares-online.sh</code>,
         que fazia <code style="font-family: var(--mono); font-size: 0.85rem; color: #c4b5fd;">pacman -Sy cachyos-calamares-next</code>
         antes de abrir o GUI. Em distro rolling isso quebra de dois jeitos:
       </p>
 
       <div class="grid grid-2" style="margin-bottom: 24px;">
-        <div class="card">
+        <div class="card reveal-up delay-2">
           <h3 style="color: var(--red);">Instalador não abre</h3>
           <p>O pacote novo vem compilado contra boost/qt/python que não existem no squashfs congelado da ISO.</p>
         </div>
-        <div class="card">
+        <div class="card reveal-up delay-3">
           <h3 style="color: var(--orange);">Personalizações somem</h3>
           <p>O pacman restaura show.qml, netinstall.yaml, packagechooser e shellprocess originais.</p>
         </div>
       </div>
 
-      <div class="note">
+      <div class="note reveal-up">
         <strong>Defesa em camadas:</strong> patch no calamares-online.sh (não reinstala), IgnorePkg no pacman.conf do live,
         e hook de reaplicação de branding fora de /etc/calamares/. Além disso, auto-correção de mismatch do boost-libs
         via Arch Linux Archive — se o ldd detectar lib faltando, baixa e instala a versão exata.
@@ -848,12 +967,12 @@
   <!-- Extras -->
   <section id="extras">
     <div class="container">
-      <div class="section-label">Pré-instalados</div>
-      <h2 class="section-title">Ferramentas embutidas</h2>
-      <p class="section-desc">Instaladas automaticamente no primeiro boot do sistema instalado.</p>
+      <div class="section-label reveal-up">Pré-instalados</div>
+      <h2 class="section-title reveal-up delay-1">Ferramentas embutidas</h2>
+      <p class="section-desc reveal-up delay-2">Instaladas automaticamente no primeiro boot do sistema instalado.</p>
 
       <div class="grid grid-2" style="margin-bottom: 40px;">
-        <div class="card">
+        <div class="card reveal-up delay-1">
           <div class="card-icon purple">📊</div>
           <h3>MachCtrl 3.0</h3>
           <p>
@@ -862,7 +981,7 @@
           </p>
           <a href="machctrl.html" class="btn btn-primary" style="margin-top: 16px; padding: 8px 16px; font-size: 0.85rem;">Ver prints e detalhes</a>
         </div>
-        <div class="card">
+        <div class="card reveal-up delay-2">
           <div class="card-icon cyan">📦</div>
           <h3>Pamac</h3>
           <p>
@@ -872,18 +991,18 @@
         </div>
       </div>
 
-      <div class="section-label">Limpeza</div>
-      <h2 class="section-title" style="margin-bottom: 24px;">ISO enxuta</h2>
+      <div class="section-label reveal-up">Limpeza</div>
+      <h2 class="section-title reveal-up delay-1" style="margin-bottom: 24px;">ISO enxuta</h2>
       <div class="grid grid-3">
-        <div class="card">
+        <div class="card reveal-up delay-1">
           <h3>Documentação</h3>
           <p>Remove /usr/share/doc, man, info e gtk-doc.</p>
         </div>
-        <div class="card">
+        <div class="card reveal-up delay-2">
           <h3>Locales</h3>
           <p>Mantém apenas pt_BR, en_US e en_GB.</p>
         </div>
-        <div class="card">
+        <div class="card reveal-up delay-3">
           <h3>Firmware</h3>
           <p>Remove NICs enterprise/datacenter. Preserva WiFi e Bluetooth.</p>
         </div>
@@ -894,7 +1013,7 @@
   <!-- Status -->
   <section>
     <div class="container">
-      <div class="status-box">
+      <div class="status-box reveal-up">
         <h3>🚧 Em desenvolvimento ativo</h3>
         <p>
           Instalação online testada e funcional em hardware real — todas as otimizações,
@@ -931,6 +1050,24 @@
     document.querySelectorAll('.nav-links a').forEach(a => {
       a.addEventListener('click', () => links.classList.remove('open'));
     });
+
+    // Intersection Observer para animações de Scroll
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Anima apenas uma vez
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>

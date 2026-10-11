@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    /* CSS reaproveitado do covenant-cachyos.html para manter a identidade visual */
     :root {
       --bg: #0a0b0f;
       --bg-elevated: #12141c;
@@ -64,6 +63,12 @@
         radial-gradient(ellipse 50% 30% at 50% 100%, rgba(124, 92, 255, 0.06), transparent 50%);
       pointer-events: none;
       z-index: 0;
+      animation: ambientGlow 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambientGlow {
+      0% { opacity: 0.8; }
+      100% { opacity: 1; transform: scale(1.05); }
     }
 
     .container {
@@ -73,6 +78,20 @@
       z-index: 1;
     }
 
+    /* Classes de Animação de Scroll */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
     nav {
       position: sticky;
       top: 0;
@@ -80,6 +99,12 @@
       backdrop-filter: blur(16px);
       background: rgba(10, 11, 15, 0.75);
       border-bottom: 1px solid var(--border-subtle);
+      animation: slideDown 0.6s ease-out forwards;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
     }
 
     .nav-inner {
@@ -98,6 +123,11 @@
       letter-spacing: -0.02em;
       text-decoration: none;
       color: var(--text);
+      transition: transform 0.2s;
+    }
+
+    .logo:hover {
+      transform: scale(1.02);
     }
 
     .logo-mark {
@@ -111,6 +141,12 @@
       font-weight: 800;
       color: #fff;
       box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    /* Hero Animations */
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .hero {
@@ -128,6 +164,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     .hero p {
@@ -136,6 +173,13 @@
       max-width: 620px;
       margin: 0 auto 36px;
       line-height: 1.7;
+      animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+      opacity: 0;
+    }
+
+    .hero ul {
+      animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+      opacity: 0;
     }
 
     .btn {
@@ -147,7 +191,7 @@
       font-size: 0.95rem;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
       border: none;
       font-family: inherit;
@@ -162,6 +206,7 @@
     .btn-ghost:hover {
       background: var(--bg-card-hover);
       border-color: #353849;
+      transform: translateY(-2px);
     }
 
     section {
@@ -198,12 +243,14 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 20px;
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
     }
 
     .gallery-item:hover {
       border-color: #353849;
       background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     }
 
     .gallery-item h3 {
@@ -229,11 +276,11 @@
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 0.3s ease;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .gallery-img-wrapper:hover img {
-      transform: scale(1.02);
+      transform: scale(1.03);
     }
 
     footer {
@@ -243,6 +290,47 @@
       color: var(--text-dim);
       font-size: 0.85rem;
     }
+
+    /* Fundo Fixo - Logo Mesclado (Covenant + MachCtrl) */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none; /* Garante que não bloqueie cliques nos botões */
+
+      /* Carrega as duas imagens */
+      background-image:
+        url('images/favicon.png'),
+        url('images/Covenant_boot.png');
+
+      /* Posiciona o ícone acima e o texto abaixo para formar um único logo */
+      background-position:
+        center calc(50% - 70px), /* Ícone centralizado, levemente para cima */
+        center calc(50% + 70px); /* Texto centralizado, levemente para baixo */
+
+      /* Define o tamanho proporcional de cada um */
+      background-size:
+        140px, /* Tamanho do favicon */
+        450px; /* Tamanho do texto Covenant */
+
+      background-repeat: no-repeat;
+
+      /* Deixa a imagem com tom de marca d'água (5% a 8% de visibilidade) */
+      opacity: 0.05;
+
+      /* Remove o fundo preto do Covenant_boot.png, mantendo apenas a parte clara */
+      mix-blend-mode: screen;
+
+      /* Opcional: animação suave acompanhando o mesh background */
+      animation: ambientLogo 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambientLogo {
+      0% { opacity: 0.03; transform: scale(1); }
+      100% { opacity: 0.06; transform: scale(1.02); }
+    }
+
   </style>
 </head>
 <body>
@@ -279,12 +367,12 @@
 
   <section>
     <div class="container">
-      <div class="section-label">Interface</div>
-      <h2 class="section-title">Visão Detalhada</h2>
+      <div class="section-label reveal-up">Interface</div>
+      <h2 class="section-title reveal-up delay-1">Visão Detalhada</h2>
 
       <div class="gallery-grid">
-        
-        <div class="gallery-item">
+
+        <div class="gallery-item reveal-up">
           <h3>Visão Geral do Sistema</h3>
           <p>Dashboard central com resumo da CPU, RAM, GPU, Rede e Top Processos. Ajusta-se perfeitamente a diferentes setups, desde notebooks até estações Xeon.</p>
           <div class="gallery-img-wrapper">
@@ -292,7 +380,7 @@
           </div>
         </div>
 
-        <div class="gallery-item">
+        <div class="gallery-item reveal-up">
           <h3>Dashboard Alternativo (Notebook)</h3>
           <p>Visão geral detalhando o estado da bateria, tensão e frequências de setups mais focados em eficiência.</p>
           <div class="gallery-img-wrapper">
@@ -300,7 +388,7 @@
           </div>
         </div>
 
-        <div class="gallery-item">
+        <div class="gallery-item reveal-up">
           <h3>Monitoramento de CPU Avançado</h3>
           <p>Acompanhamento individual de uso, temperatura e frequência de cada thread e núcleo do processador.</p>
           <div class="gallery-img-wrapper">
@@ -308,7 +396,7 @@
           </div>
         </div>
 
-        <div class="gallery-item">
+        <div class="gallery-item reveal-up">
           <h3>Gestão de Memória</h3>
           <p>Visualização dos pentes instalados, velocidade (MT/s), voltagem e slots disponíveis na placa-mãe.</p>
           <div class="gallery-img-wrapper">
@@ -316,7 +404,7 @@
           </div>
         </div>
 
-        <div class="gallery-item">
+        <div class="gallery-item reveal-up">
           <h3>Métricas de Armazenamento (Discos)</h3>
           <p>Taxa de leitura e escrita em tempo real, capacidade total e sistemas de arquivos (F2FS, BTRFS, NTFS3, etc.) de todas as unidades mapeadas.</p>
           <div class="gallery-img-wrapper">
@@ -324,7 +412,7 @@
           </div>
         </div>
 
-        <div class="gallery-item">
+        <div class="gallery-item reveal-up">
           <h3>Perfis de Energia</h3>
           <p>Ajuste simplificado para os modos de Desempenho, Equilibrado e Economia de Bateria com detalhamento de saúde das células.</p>
           <div class="gallery-img-wrapper">
@@ -332,7 +420,7 @@
           </div>
         </div>
 
-        <div class="gallery-item">
+        <div class="gallery-item reveal-up">
           <h3>Controle de Ventoinhas (Fans)</h3>
           <p>Controle preciso de RPM com suporte a curvas customizadas e modos Automático, Manual e Máximo via PWM.</p>
           <div class="gallery-img-wrapper">
@@ -340,7 +428,7 @@
           </div>
         </div>
 
-        <div class="gallery-item">
+        <div class="gallery-item reveal-up">
           <h3>Limpeza do Sistema</h3>
           <p>Manutenção ágil para remover pacotes órfãos, esvaziar cache do Pacman, limpar logs do Journal e muito mais em um clique.</p>
           <div class="gallery-img-wrapper">
@@ -348,7 +436,7 @@
           </div>
         </div>
 
-        <div class="gallery-item">
+        <div class="gallery-item reveal-up">
           <h3>Ajustes</h3>
           <p>Alguns ajustes para melhor aproveitar seu hardware, rede, discos, serviços e memoria.</p>
           <div class="gallery-img-wrapper">
@@ -365,5 +453,25 @@
       MachCtrl 3.0 — Desenvolvido para Arch
     </div>
   </footer>
+
+  <script>
+    // Intersection Observer para animações de Scroll
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Anima apenas uma vez
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
