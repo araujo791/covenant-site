@@ -5,44 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MachCtrl - Detalhes e Prints</title>
   <link rel="icon" type="image/png" href="images/favicon.png" />
+  <meta name="theme-color" content="#07080c" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0a0b0f;
-      --bg-elevated: #12141c;
-      --bg-card: #161922;
-      --bg-card-hover: #1c1f2b;
-      --border: #252836;
-      --border-subtle: #1e2130;
-      --text: #e8eaef;
-      --text-muted: #9aa3b5;
+      --bg: #07080c;
+      --bg-elevated: #0e1017;
+      --bg-card: rgba(22, 25, 34, 0.62);
+      --bg-card-hover: rgba(28, 31, 43, 0.8);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --text: #eef0f6;
+      --text-muted: #a0a9bd;
       --text-dim: #6b7385;
       --accent: #7c5cff;
+      --accent-2: #a78bfa;
       --accent-soft: rgba(124, 92, 255, 0.15);
-      --accent-glow: rgba(124, 92, 255, 0.35);
+      --accent-glow: rgba(124, 92, 255, 0.4);
       --cyan: #22d3ee;
-      --cyan-soft: rgba(34, 211, 238, 0.12);
+      --pink: #f472b6;
       --green: #34d399;
-      --green-soft: rgba(52, 211, 153, 0.12);
-      --orange: #fb923c;
-      --orange-soft: rgba(251, 146, 60, 0.12);
-      --red: #f87171;
-      --radius: 14px;
-      --radius-sm: 10px;
-      --shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+      --radius-sm: 12px;
       --font: 'Inter', system-ui, -apple-system, sans-serif;
       --mono: 'JetBrains Mono', ui-monospace, monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) var(--bg);
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; scrollbar-width: thin; scrollbar-color: var(--border-strong) var(--bg); }
 
     body {
       font-family: var(--font);
@@ -52,395 +46,423 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
+    ::selection { background: var(--accent); color: #fff; }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 50% at 20% -10%, rgba(124, 92, 255, 0.18), transparent 50%),
-        radial-gradient(ellipse 60% 40% at 90% 10%, rgba(34, 211, 238, 0.08), transparent 45%),
-        radial-gradient(ellipse 50% 30% at 50% 100%, rgba(124, 92, 255, 0.06), transparent 50%);
-      pointer-events: none;
-      z-index: 0;
-      animation: ambientGlow 10s ease-in-out infinite alternate;
+    #scrollBar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 100%;
+      transform-origin: 0 50%; transform: scaleX(0);
+      background: linear-gradient(90deg, var(--accent), var(--cyan), var(--pink));
+      z-index: 300; box-shadow: 0 0 12px var(--accent-glow);
     }
 
-    @keyframes ambientGlow {
-      0% { opacity: 0.8; }
-      100% { opacity: 1; transform: scale(1.05); }
+    /* Fundo */
+    .bg-layer { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .aurora { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.55; will-change: transform; }
+    .aurora.a1 { width: 620px; height: 620px; background: radial-gradient(circle, #7c5cff, transparent 65%); top: -200px; left: -120px; animation: float1 22s ease-in-out infinite alternate; }
+    .aurora.a2 { width: 520px; height: 520px; background: radial-gradient(circle, #22d3ee, transparent 65%); top: 5%; right: -160px; opacity: 0.35; animation: float2 26s ease-in-out infinite alternate; }
+    .aurora.a3 { width: 560px; height: 560px; background: radial-gradient(circle, #f472b6, transparent 65%); bottom: -240px; left: 25%; opacity: 0.22; animation: float3 30s ease-in-out infinite alternate; }
+    @keyframes float1 { to { transform: translate(180px, 140px) scale(1.2); } }
+    @keyframes float2 { to { transform: translate(-200px, 180px) scale(0.9); } }
+    @keyframes float3 { to { transform: translate(220px, -120px) scale(1.15); } }
+
+    .grid-bg {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 75% 60% at 50% 25%, #000 25%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 25%, #000 25%, transparent 80%);
+    }
+    #particles { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    .watermark {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url('images/favicon.png'), url('images/Covenant_boot.png');
+      background-position: center calc(50% - 70px), center calc(50% + 70px);
+      background-size: 140px, 450px; background-repeat: no-repeat;
+      opacity: 0.045; mix-blend-mode: screen;
+      animation: ambientLogo 10s ease-in-out infinite alternate;
+    }
+    @keyframes ambientLogo { 0% { opacity: 0.025; transform: scale(1); } 100% { opacity: 0.06; transform: scale(1.03); } }
+
+    #cursorGlow {
+      position: fixed; top: 0; left: 0; width: 520px; height: 520px; margin: -260px 0 0 -260px;
+      background: radial-gradient(circle, rgba(124, 92, 255, 0.16), transparent 62%);
+      pointer-events: none; z-index: 1; opacity: 0; transition: opacity 0.4s; will-change: transform;
     }
 
-    .container {
-      width: min(1120px, 92%);
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
+    .container { width: min(1160px, 92%); margin: 0 auto; position: relative; z-index: 2; }
 
-    /* Classes de Animação de Scroll */
-    .reveal-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal-up { opacity: 0; transform: translateY(36px); filter: blur(6px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease), filter 0.9s var(--ease); }
+    .reveal-up.visible { opacity: 1; transform: translateY(0); filter: blur(0); }
     .delay-1 { transition-delay: 0.1s; }
     .delay-2 { transition-delay: 0.2s; }
     .delay-3 { transition-delay: 0.3s; }
 
+    /* Nav */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(16px);
-      background: rgba(10, 11, 15, 0.75);
-      border-bottom: 1px solid var(--border-subtle);
-      animation: slideDown 0.6s ease-out forwards;
+      position: sticky; top: 0; z-index: 200;
+      backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%);
+      background: rgba(7, 8, 12, 0.6); border-bottom: 1px solid var(--border);
+      animation: slideDown 0.7s var(--ease) forwards;
     }
-
-    @keyframes slideDown {
-      from { transform: translateY(-100%); }
-      to { transform: translateY(0); }
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: -0.02em;
-      text-decoration: none;
-      color: var(--text);
-      transition: transform 0.2s;
-    }
-
-    .logo:hover {
-      transform: scale(1.02);
-    }
-
-    .logo-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 9px;
-      background: linear-gradient(135deg, var(--accent), #a78bfa);
-      display: grid;
-      place-items: center;
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: #fff;
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    /* Hero Animations */
-    @keyframes heroFadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero {
-      padding: 80px 0 60px;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.4rem, 5.5vw, 3.6rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.15;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #fff 30%, #a5b4fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .hero p {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      max-width: 620px;
-      margin: 0 auto 36px;
-      line-height: 1.7;
-      animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
-      opacity: 0;
-    }
-
-    .hero ul {
-      animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
-      opacity: 0;
-    }
+    @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; text-decoration: none; color: var(--text); transition: transform 0.2s; }
+    .logo:hover { transform: scale(1.03); }
+    .logo-mark { width: 34px; height: 34px; border-radius: 10px; object-fit: cover; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 0 22px var(--accent-glow); animation: logoPulse 4s ease-in-out infinite; }
+    @keyframes logoPulse { 0%, 100% { box-shadow: 0 0 18px var(--accent-glow); } 50% { box-shadow: 0 0 32px rgba(124, 92, 255, 0.7); } }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-      border: none;
-      font-family: inherit;
+      position: relative; display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 12px; font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; cursor: pointer; border: none; font-family: inherit;
+      transition: transform 0.25s var(--ease), background 0.3s, border-color 0.3s; will-change: transform;
     }
+    .btn-ghost { background: rgba(255,255,255,0.04); color: var(--text); border: 1px solid var(--border-strong); backdrop-filter: blur(8px); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.3); }
 
-    .btn-ghost {
-      background: var(--bg-card);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
+    /* Hero */
+    @keyframes heroFadeUp { from { opacity: 0; transform: translateY(44px); filter: blur(8px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+    .hero { padding: 90px 0 50px; text-align: center; }
 
-    .btn-ghost:hover {
-      background: var(--bg-card-hover);
-      border-color: #353849;
-      transform: translateY(-2px);
+    .badge {
+      position: relative; display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-soft); color: #d4c8ff; font-size: 0.8rem; font-weight: 600;
+      padding: 7px 16px; border-radius: 999px; border: 1px solid rgba(124, 92, 255, 0.3);
+      margin-bottom: 26px; overflow: hidden;
+      animation: heroFadeUp 0.9s var(--ease) forwards;
     }
+    .badge::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,0.22), transparent); animation: shine 3.5s ease-in-out infinite; }
+    @keyframes shine { 0%, 55% { left: -100%; } 100% { left: 160%; } }
 
-    section {
-      padding: 40px 0 80px;
+    .hero h1 {
+      font-size: clamp(2.6rem, 6.5vw, 4.6rem); font-weight: 900; letter-spacing: -0.045em; line-height: 1.08; margin-bottom: 20px;
+      background: linear-gradient(120deg, #fff 10%, #c4b5fd 35%, #67e8f9 60%, #f9a8d4 85%, #fff 100%);
+      background-size: 250% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      opacity: 0; animation: heroFadeUp 0.9s var(--ease) 0.1s forwards, gradientShift 8s linear 1s infinite;
     }
+    @keyframes gradientShift { to { background-position: 250% center; } }
 
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 12px;
-      text-align: center;
+    .hero p.lead {
+      font-size: 1.12rem; color: var(--text-muted); max-width: 680px; margin: 0 auto 34px; line-height: 1.75;
+      opacity: 0; animation: heroFadeUp 0.9s var(--ease) 0.2s forwards;
     }
+    .hero p.lead code, .tech-chip { font-family: var(--mono); }
+    .hero p.lead code { font-size: 0.88rem; background: rgba(124, 92, 255, 0.14); color: #d4c8ff; padding: 1px 7px; border-radius: 6px; }
 
-    .section-title {
-      font-size: clamp(1.6rem, 3vw, 2rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 40px;
-      text-align: center;
+    .tech-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; opacity: 0; animation: heroFadeUp 0.9s var(--ease) 0.3s forwards; }
+    .tech-chip {
+      font-size: 0.8rem; font-weight: 500; color: var(--text-muted);
+      padding: 6px 14px; border-radius: 999px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      transition: all 0.3s var(--ease);
     }
+    .tech-chip:hover { color: #fff; border-color: rgba(124,92,255,0.6); background: var(--accent-soft); transform: translateY(-3px); box-shadow: 0 6px 20px var(--accent-glow); }
 
-    /* Galeria de imagens */
-    .gallery-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
+    /* Features */
+    .features { padding: 30px 0 20px; }
+    .feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+    .feat {
+      --mx: 50%; --my: 50%;
+      position: relative; overflow: hidden;
+      padding: 22px 20px; border-radius: var(--radius);
+      background: var(--bg-card); border: 1px solid var(--border);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      text-decoration: none; color: inherit; display: block;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s var(--ease), box-shadow 0.4s;
     }
+    .feat::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(320px circle at var(--mx) var(--my), rgba(124, 92, 255, 0.2), transparent 45%);
+      opacity: 0; transition: opacity 0.35s;
+    }
+    .feat:hover::before { opacity: 1; }
+    .feat:hover { transform: translateY(-5px); border-color: rgba(124,92,255,0.45); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+    .feat > * { position: relative; }
+    .feat-ico { font-size: 1.5rem; margin-bottom: 10px; display: block; transition: transform 0.4s var(--ease); }
+    .feat:hover .feat-ico { transform: scale(1.18) rotate(-6deg); }
+    .feat h3 { font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .feat p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+    .feat .soon { display: inline-block; margin-top: 6px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #fdba74; background: rgba(251,146,60,0.12); border: 1px solid rgba(251,146,60,0.3); padding: 2px 8px; border-radius: 999px; }
+
+    /* Galeria */
+    section { padding: 70px 0 90px; }
+    .section-head { text-align: center; margin-bottom: 52px; }
+    .section-label { display: inline-flex; align-items: center; gap: 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); margin-bottom: 14px; }
+    .section-label::before, .section-label::after { content: ''; width: 28px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--cyan)); }
+    .section-title { font-size: clamp(1.8rem, 3.6vw, 2.5rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.15; }
+
+    .gallery-grid { display: flex; flex-direction: column; gap: 72px; }
 
     .gallery-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      transition: border-color 0.3s, background 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+      display: grid; grid-template-columns: 0.8fr 1.4fr; gap: 40px; align-items: center;
     }
+    .gallery-item:nth-child(even) { grid-template-columns: 1.4fr 0.8fr; }
+    .gallery-item:nth-child(even) .g-text { order: 2; }
 
-    .gallery-item:hover {
-      border-color: #353849;
-      background: var(--bg-card-hover);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    .g-num { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; color: var(--accent-2); letter-spacing: 0.1em; margin-bottom: 10px; display: block; }
+    .g-text h3 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 12px; }
+    .g-text p { color: var(--text-muted); font-size: 0.98rem; }
+
+    /* Janela de app */
+    .win {
+      position: relative; border-radius: var(--radius); overflow: hidden;
+      background: var(--bg-elevated); border: 1px solid var(--border-strong);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.55), 0 0 80px rgba(124, 92, 255, 0.1);
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease-out, box-shadow 0.4s;
+      will-change: transform; cursor: zoom-in;
     }
-
-    .gallery-item h3 {
-      font-size: 1.25rem;
-      margin-bottom: 8px;
-      color: var(--text);
+    .win:hover { box-shadow: 0 40px 90px rgba(0,0,0,0.6), 0 0 110px rgba(124, 92, 255, 0.28); }
+    .win-bar { display: flex; align-items: center; gap: 7px; padding: 11px 16px; background: rgba(255,255,255,0.035); border-bottom: 1px solid var(--border); }
+    .win-bar i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+    .win-bar i:nth-child(1) { background: #ff5f57; }
+    .win-bar i:nth-child(2) { background: #febc2e; }
+    .win-bar i:nth-child(3) { background: #28c840; }
+    .win-title { margin-left: 10px; font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); }
+    .win-body { position: relative; overflow: hidden; }
+    .win-body img { width: 100%; height: auto; display: block; transition: transform 0.8s var(--ease); }
+    .win:hover .win-body img { transform: scale(1.04); }
+    .win-body::after {
+      content: '🔍 Ampliar'; position: absolute; right: 14px; bottom: 14px;
+      font-size: 0.75rem; font-weight: 600; padding: 6px 12px; border-radius: 999px;
+      background: rgba(7,8,12,0.75); border: 1px solid var(--border-strong); backdrop-filter: blur(8px);
+      opacity: 0; transform: translateY(8px); transition: all 0.3s var(--ease);
     }
-
-    .gallery-item p {
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      font-size: 0.95rem;
+    .win:hover .win-body::after { opacity: 1; transform: translateY(0); }
+    .win-body::before {
+      content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.1) 50%, transparent 65%);
+      transform: translateX(-120%); transition: transform 0.9s var(--ease);
     }
+    .win:hover .win-body::before { transform: translateX(120%); }
 
-    .gallery-img-wrapper {
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    /* Lightbox */
+    #lightbox {
+      position: fixed; inset: 0; z-index: 500; display: none; align-items: center; justify-content: center;
+      background: rgba(4, 5, 8, 0.9); backdrop-filter: blur(14px);
+      padding: 40px 70px; opacity: 0; transition: opacity 0.3s;
     }
-
-    .gallery-img-wrapper img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    #lightbox.open { display: flex; }
+    #lightbox.show { opacity: 1; }
+    #lbImg { max-width: 100%; max-height: 82vh; border-radius: 14px; border: 1px solid var(--border-strong); box-shadow: 0 30px 100px rgba(0,0,0,0.8), 0 0 120px rgba(124,92,255,0.25); transform: scale(0.94); transition: transform 0.4s var(--ease); }
+    #lightbox.show #lbImg { transform: scale(1); }
+    #lbCap { position: absolute; left: 0; right: 0; bottom: 22px; text-align: center; color: var(--text-muted); font-size: 0.9rem; padding: 0 20px; }
+    #lbCap b { color: var(--text); }
+    .lb-btn {
+      position: absolute; width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
+      background: rgba(255,255,255,0.07); border: 1px solid var(--border-strong); color: #fff; font-size: 1.2rem; cursor: pointer;
+      transition: all 0.25s;
     }
+    .lb-btn:hover { background: var(--accent); box-shadow: 0 6px 24px var(--accent-glow); }
+    #lbClose { top: 22px; right: 22px; }
+    #lbPrev { left: 16px; top: 50%; transform: translateY(-50%); }
+    #lbNext { right: 16px; top: 50%; transform: translateY(-50%); }
 
-    .gallery-img-wrapper:hover img {
-      transform: scale(1.03);
+    footer { position: relative; z-index: 2; border-top: 1px solid var(--border); padding: 44px 0; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
+    footer .foot-brand { display: inline-block; margin-bottom: 6px; font-weight: 700; font-size: 0.95rem; background: linear-gradient(90deg, var(--accent-2), var(--cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+    #toTop {
+      position: fixed; right: 24px; bottom: 24px; z-index: 250; width: 46px; height: 46px; border-radius: 14px;
+      display: grid; place-items: center; background: var(--bg-card-hover); border: 1px solid var(--border-strong);
+      color: #fff; font-size: 1.1rem; cursor: pointer; backdrop-filter: blur(10px);
+      opacity: 0; transform: translateY(16px); pointer-events: none; transition: all 0.35s var(--ease);
     }
+    #toTop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #toTop:hover { background: var(--accent); box-shadow: 0 6px 24px var(--accent-glow); transform: translateY(-3px); }
 
-    footer {
-      border-top: 1px solid var(--border-subtle);
-      padding: 40px 0;
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 0.85rem;
+    @media (max-width: 900px) {
+      .feat-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item, .gallery-item:nth-child(even) { grid-template-columns: 1fr; gap: 22px; }
+      .gallery-item:nth-child(even) .g-text { order: 0; }
+      .gallery-grid { gap: 56px; }
+      #lightbox { padding: 70px 14px 60px; }
+      #lbPrev { left: 8px; } #lbNext { right: 8px; }
+      #cursorGlow { display: none; }
+      .hero { padding: 60px 0 36px; }
     }
+    @media (max-width: 520px) { .feat-grid { grid-template-columns: 1fr; } }
 
-    /* Fundo Fixo - Logo Mesclado (Covenant + MachCtrl) */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none; /* Garante que não bloqueie cliques nos botões */
-
-      /* Carrega as duas imagens */
-      background-image:
-        url('images/favicon.png'),
-        url('images/Covenant_boot.png');
-
-      /* Posiciona o ícone acima e o texto abaixo para formar um único logo */
-      background-position:
-        center calc(50% - 70px), /* Ícone centralizado, levemente para cima */
-        center calc(50% + 70px); /* Texto centralizado, levemente para baixo */
-
-      /* Define o tamanho proporcional de cada um */
-      background-size:
-        140px, /* Tamanho do favicon */
-        450px; /* Tamanho do texto Covenant */
-
-      background-repeat: no-repeat;
-
-      /* Deixa a imagem com tom de marca d'água (5% a 8% de visibilidade) */
-      opacity: 0.05;
-
-      /* Remove o fundo preto do Covenant_boot.png, mantendo apenas a parte clara */
-      mix-blend-mode: screen;
-
-      /* Opcional: animação suave acompanhando o mesh background */
-      animation: ambientLogo 10s ease-in-out infinite alternate;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      .reveal-up { opacity: 1; transform: none; filter: none; }
+      .hero h1, .hero p.lead, .tech-row { opacity: 1; }
     }
-
-    @keyframes ambientLogo {
-      0% { opacity: 0.03; transform: scale(1); }
-      100% { opacity: 0.06; transform: scale(1.02); }
-    }
-
   </style>
 </head>
 <body>
+  <div id="scrollBar"></div>
+
+  <div class="bg-layer" aria-hidden="true">
+    <div class="aurora a1"></div>
+    <div class="aurora a2"></div>
+    <div class="aurora a3"></div>
+    <div class="grid-bg"></div>
+    <canvas id="particles"></canvas>
+  </div>
+  <div class="watermark" aria-hidden="true"></div>
+  <div id="cursorGlow" aria-hidden="true"></div>
+
   <nav>
     <div class="container nav-inner">
-<a href="index.html" class="logo">
+      <a href="index.html" class="logo">
         <img src="images/favicon.png" alt="Logo Covenant" class="logo-mark" />
         Covenant CachyOS
       </a>
-      <a href="index.html" class="btn btn-ghost" style="font-size: 0.85rem; padding: 6px 14px;">← Voltar ao Início</a>
+      <a href="index.html" class="btn btn-ghost magnetic">← Voltar ao Início</a>
     </div>
   </nav>
 
-<header class="hero">
+  <header class="hero">
     <div class="container">
+      <div class="badge">📊 Pré-instalado na Covenant CachyOS</div>
       <h1>MachCtrl 3.0</h1>
-      <p>
+      <p class="lead">
         Monitor e Otimizador de Hardware para Linux — versão nativa com Rust + Tauri v2 + React.<br>
-        Visual dark/light moderno, backend Rust lendo os sensores direto de /proc e /sys (sem sysinfo, sem Electron, sem WebView pesado — usa o WebKitGTK do próprio sistema).
+        Visual dark/light moderno, backend Rust lendo os sensores direto de <code>/proc</code> e <code>/sys</code>
+        (sem sysinfo, sem Electron, sem WebView pesado — usa o WebKitGTK do próprio sistema).
       </p>
-
-      <ul style="text-align: left; max-width: 780px; margin: 0 auto; color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; padding-left: 20px;">
-        <li><strong style="color: var(--text);">Visão Geral</strong> — cards de CPU/Memória/GPU com gráficos ao vivo, Top Processos (RAM) e Rede</li>
-        <li><strong style="color: var(--text);">CPU</strong> — multi-socket (um card por CPU física), grid de núcleos com atividade + temperatura</li>
-        <li><strong style="color: var(--text);">Memória</strong> — uso + pentes DIMM (via dmidecode)</li>
-        <li><strong style="color: var(--text);">Discos</strong> — todas as partições com barra de uso</li>
-        <li><strong style="color: var(--text);">Fans</strong> — RPM/PWM com slider de controle e modo Auto</li>
-        <li><strong style="color: var(--text);">Energia</strong> — perfis Economia / Equilibrado / Desempenho</li>
-        <li><strong style="color: var(--text);">Limpeza</strong> — tarefas de limpeza do sistema</li>
-        <li><strong style="color: var(--text);">Ajuste</strong> — otimizações do sistema <em>(em construção)</em></li>
-      </ul>
+      <div class="tech-row">
+        <span class="tech-chip">Rust</span>
+        <span class="tech-chip">Tauri v2</span>
+        <span class="tech-chip">React</span>
+        <span class="tech-chip">WebKitGTK</span>
+        <span class="tech-chip">/proc + /sys</span>
+      </div>
     </div>
   </header>
 
+  <!-- Recursos -->
+  <div class="features">
+    <div class="container">
+      <div class="feat-grid">
+        <a href="#g1" class="feat reveal-up"><span class="feat-ico">🧭</span><h3>Visão Geral</h3><p>Cards de CPU/Memória/GPU com gráficos ao vivo, Top Processos (RAM) e Rede</p></a>
+        <a href="#g3" class="feat reveal-up delay-1"><span class="feat-ico">🧠</span><h3>CPU</h3><p>Multi-socket (um card por CPU física), grid de núcleos com atividade + temperatura</p></a>
+        <a href="#g4" class="feat reveal-up delay-2"><span class="feat-ico">🧩</span><h3>Memória</h3><p>Uso + pentes DIMM (via dmidecode)</p></a>
+        <a href="#g5" class="feat reveal-up delay-3"><span class="feat-ico">💽</span><h3>Discos</h3><p>Todas as partições com barra de uso</p></a>
+        <a href="#g7" class="feat reveal-up"><span class="feat-ico">🌀</span><h3>Fans</h3><p>RPM/PWM com slider de controle e modo Auto</p></a>
+        <a href="#g6" class="feat reveal-up delay-1"><span class="feat-ico">🔋</span><h3>Energia</h3><p>Perfis Economia / Equilibrado / Desempenho</p></a>
+        <a href="#g8" class="feat reveal-up delay-2"><span class="feat-ico">🧹</span><h3>Limpeza</h3><p>Tarefas de limpeza do sistema</p></a>
+        <a href="#g9" class="feat reveal-up delay-3"><span class="feat-ico">🛠️</span><h3>Ajuste</h3><p>Otimizações do sistema</p><span class="soon">em construção</span></a>
+      </div>
+    </div>
+  </div>
+
   <section>
     <div class="container">
-      <div class="section-label reveal-up">Interface</div>
-      <h2 class="section-title reveal-up delay-1">Visão Detalhada</h2>
+      <div class="section-head">
+        <div class="section-label reveal-up">Interface</div>
+        <h2 class="section-title reveal-up delay-1">Visão Detalhada</h2>
+      </div>
 
       <div class="gallery-grid">
 
-        <div class="gallery-item reveal-up">
-          <h3>Visão Geral do Sistema</h3>
-          <p>Dashboard central com resumo da CPU, RAM, GPU, Rede e Top Processos. Ajusta-se perfeitamente a diferentes setups, desde notebooks até estações Xeon.</p>
-          <div class="gallery-img-wrapper">
-            <img src="images/Captura_de_tela_20261010_111819.png" alt="Visão Geral - Xeon" loading="lazy" />
+        <div class="gallery-item" id="g1">
+          <div class="g-text reveal-up">
+            <span class="g-num">01 / 09</span>
+            <h3>Visão Geral do Sistema</h3>
+            <p>Dashboard central com resumo da CPU, RAM, GPU, Rede e Top Processos. Ajusta-se perfeitamente a diferentes setups, desde notebooks até estações Xeon.</p>
+          </div>
+          <div class="win reveal-up delay-1" data-title="Visão Geral do Sistema">
+            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — overview</span></div>
+            <div class="win-body"><img src="images/Captura_de_tela_20261010_111819.png" alt="Visão Geral - Xeon" loading="lazy" /></div>
           </div>
         </div>
 
-        <div class="gallery-item reveal-up">
-          <h3>Dashboard Alternativo (Notebook)</h3>
-          <p>Visão geral detalhando o estado da bateria, tensão e frequências de setups mais focados em eficiência.</p>
-          <div class="gallery-img-wrapper">
-            <img src="images/Captura_de_tela_20261010_111739.png" alt="Visão Geral - Inspiron" loading="lazy" />
+        <div class="gallery-item" id="g2">
+          <div class="g-text reveal-up">
+            <span class="g-num">02 / 09</span>
+            <h3>Dashboard Alternativo (Notebook)</h3>
+            <p>Visão geral detalhando o estado da bateria, tensão e frequências de setups mais focados em eficiência.</p>
+          </div>
+          <div class="win reveal-up delay-1" data-title="Dashboard Alternativo (Notebook)">
+            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — notebook</span></div>
+            <div class="win-body"><img src="images/Captura_de_tela_20261010_111739.png" alt="Visão Geral - Inspiron" loading="lazy" /></div>
           </div>
         </div>
 
-        <div class="gallery-item reveal-up">
-          <h3>Monitoramento de CPU Avançado</h3>
-          <p>Acompanhamento individual de uso, temperatura e frequência de cada thread e núcleo do processador.</p>
-          <div class="gallery-img-wrapper">
-            <img src="images/Captura_de_tela_20261010_111829.png" alt="Monitoramento de CPU" loading="lazy" />
+        <div class="gallery-item" id="g3">
+          <div class="g-text reveal-up">
+            <span class="g-num">03 / 09</span>
+            <h3>Monitoramento de CPU Avançado</h3>
+            <p>Acompanhamento individual de uso, temperatura e frequência de cada thread e núcleo do processador.</p>
+          </div>
+          <div class="win reveal-up delay-1" data-title="Monitoramento de CPU Avançado">
+            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — cpu</span></div>
+            <div class="win-body"><img src="images/Captura_de_tela_20261010_111829.png" alt="Monitoramento de CPU" loading="lazy" /></div>
           </div>
         </div>
 
-        <div class="gallery-item reveal-up">
-          <h3>Gestão de Memória</h3>
-          <p>Visualização dos pentes instalados, velocidade (MT/s), voltagem e slots disponíveis na placa-mãe.</p>
-          <div class="gallery-img-wrapper">
-            <img src="images/Captura_de_tela_20261010_111840.png" alt="Gestão de Memória" loading="lazy" />
+        <div class="gallery-item" id="g4">
+          <div class="g-text reveal-up">
+            <span class="g-num">04 / 09</span>
+            <h3>Gestão de Memória</h3>
+            <p>Visualização dos pentes instalados, velocidade (MT/s), voltagem e slots disponíveis na placa-mãe.</p>
+          </div>
+          <div class="win reveal-up delay-1" data-title="Gestão de Memória">
+            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — memória</span></div>
+            <div class="win-body"><img src="images/Captura_de_tela_20261010_111840.png" alt="Gestão de Memória" loading="lazy" /></div>
           </div>
         </div>
 
-        <div class="gallery-item reveal-up">
-          <h3>Métricas de Armazenamento (Discos)</h3>
-          <p>Taxa de leitura e escrita em tempo real, capacidade total e sistemas de arquivos (F2FS, BTRFS, NTFS3, etc.) de todas as unidades mapeadas.</p>
-          <div class="gallery-img-wrapper">
-            <img src="images/Captura_de_tela_20261010_111849.png" alt="Métricas de Discos" loading="lazy" />
+        <div class="gallery-item" id="g5">
+          <div class="g-text reveal-up">
+            <span class="g-num">05 / 09</span>
+            <h3>Métricas de Armazenamento (Discos)</h3>
+            <p>Taxa de leitura e escrita em tempo real, capacidade total e sistemas de arquivos (F2FS, BTRFS, NTFS3, etc.) de todas as unidades mapeadas.</p>
+          </div>
+          <div class="win reveal-up delay-1" data-title="Métricas de Armazenamento (Discos)">
+            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — discos</span></div>
+            <div class="win-body"><img src="images/Captura_de_tela_20261010_111849.png" alt="Métricas de Discos" loading="lazy" /></div>
           </div>
         </div>
 
-        <div class="gallery-item reveal-up">
-          <h3>Perfis de Energia</h3>
-          <p>Ajuste simplificado para os modos de Desempenho, Equilibrado e Economia de Bateria com detalhamento de saúde das células.</p>
-          <div class="gallery-img-wrapper">
-            <img src="images/Captura_de_tela_20261010_111756.png" alt="Perfis de Energia" loading="lazy" />
+        <div class="gallery-item" id="g6">
+          <div class="g-text reveal-up">
+            <span class="g-num">06 / 09</span>
+            <h3>Perfis de Energia</h3>
+            <p>Ajuste simplificado para os modos de Desempenho, Equilibrado e Economia de Bateria com detalhamento de saúde das células.</p>
+          </div>
+          <div class="win reveal-up delay-1" data-title="Perfis de Energia">
+            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — energia</span></div>
+            <div class="win-body"><img src="images/Captura_de_tela_20261010_111756.png" alt="Perfis de Energia" loading="lazy" /></div>
           </div>
         </div>
 
-        <div class="gallery-item reveal-up">
-          <h3>Controle de Ventoinhas (Fans)</h3>
-          <p>Controle preciso de RPM com suporte a curvas customizadas e modos Automático, Manual e Máximo via PWM.</p>
-          <div class="gallery-img-wrapper">
-            <img src="images/Captura_de_tela_20261010_111856.png" alt="Controle de Ventoinhas" loading="lazy" />
+        <div class="gallery-item" id="g7">
+          <div class="g-text reveal-up">
+            <span class="g-num">07 / 09</span>
+            <h3>Controle de Ventoinhas (Fans)</h3>
+            <p>Controle preciso de RPM com suporte a curvas customizadas e modos Automático, Manual e Máximo via PWM.</p>
+          </div>
+          <div class="win reveal-up delay-1" data-title="Controle de Ventoinhas (Fans)">
+            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — fans</span></div>
+            <div class="win-body"><img src="images/Captura_de_tela_20261010_111856.png" alt="Controle de Ventoinhas" loading="lazy" /></div>
           </div>
         </div>
 
-        <div class="gallery-item reveal-up">
-          <h3>Limpeza do Sistema</h3>
-          <p>Manutenção ágil para remover pacotes órfãos, esvaziar cache do Pacman, limpar logs do Journal e muito mais em um clique.</p>
-          <div class="gallery-img-wrapper">
-            <img src="images/Captura_de_tela_20261010_111907.png" alt="Limpeza do Sistema" loading="lazy" />
+        <div class="gallery-item" id="g8">
+          <div class="g-text reveal-up">
+            <span class="g-num">08 / 09</span>
+            <h3>Limpeza do Sistema</h3>
+            <p>Manutenção ágil para remover pacotes órfãos, esvaziar cache do Pacman, limpar logs do Journal e muito mais em um clique.</p>
+          </div>
+          <div class="win reveal-up delay-1" data-title="Limpeza do Sistema">
+            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — limpeza</span></div>
+            <div class="win-body"><img src="images/Captura_de_tela_20261010_111907.png" alt="Limpeza do Sistema" loading="lazy" /></div>
           </div>
         </div>
 
-        <div class="gallery-item reveal-up">
-          <h3>Ajustes</h3>
-          <p>Alguns ajustes para melhor aproveitar seu hardware, rede, discos, serviços e memoria.</p>
-          <div class="gallery-img-wrapper">
-            <img src="images/Captura_de_tela_20261010_111914.png" alt="Ajustes" loading="lazy" />
+        <div class="gallery-item" id="g9">
+          <div class="g-text reveal-up">
+            <span class="g-num">09 / 09</span>
+            <h3>Ajustes</h3>
+            <p>Alguns ajustes para melhor aproveitar seu hardware, rede, discos, serviços e memoria.</p>
+          </div>
+          <div class="win reveal-up delay-1" data-title="Ajustes">
+            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — ajustes</span></div>
+            <div class="win-body"><img src="images/Captura_de_tela_20261010_111914.png" alt="Ajustes" loading="lazy" /></div>
           </div>
         </div>
 
@@ -450,28 +472,156 @@
 
   <footer>
     <div class="container">
-      MachCtrl 3.0 — Desenvolvido para Arch
+      <div class="foot-brand">MachCtrl 3.0</div><br />
+      Desenvolvido para Arch
     </div>
   </footer>
 
+  <!-- Lightbox -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
+    <button class="lb-btn" id="lbClose" aria-label="Fechar">✕</button>
+    <button class="lb-btn" id="lbPrev" aria-label="Anterior">‹</button>
+    <img id="lbImg" alt="" />
+    <button class="lb-btn" id="lbNext" aria-label="Próxima">›</button>
+    <div id="lbCap"></div>
+  </div>
+
+  <button id="toTop" aria-label="Voltar ao topo">↑</button>
+
   <script>
-    // Intersection Observer para animações de Scroll
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.15
-    };
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const finePointer = window.matchMedia('(pointer: fine)').matches;
 
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // Anima apenas uma vez
-        }
+    // Reveal
+    const revealObs = new IntersectionObserver((entries, o) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); o.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal-up').forEach(el => revealObs.observe(el));
+
+    // Scroll
+    const bar = document.getElementById('scrollBar');
+    const toTop = document.getElementById('toTop');
+    addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - innerHeight;
+      bar.style.transform = 'scaleX(' + (h > 0 ? scrollY / h : 0) + ')';
+      toTop.classList.toggle('show', scrollY > 700);
+    }, { passive: true });
+    toTop.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Cursor glow, spotlight, tilt, magnético
+    if (finePointer && !reduceMotion) {
+      const glow = document.getElementById('cursorGlow');
+      let gx = 0, gy = 0, tx = 0, ty = 0;
+      addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; glow.style.opacity = 1; });
+      document.addEventListener('mouseleave', () => glow.style.opacity = 0);
+      (function loop() {
+        gx += (tx - gx) * 0.12; gy += (ty - gy) * 0.12;
+        glow.style.transform = 'translate(' + gx + 'px,' + gy + 'px)';
+        requestAnimationFrame(loop);
+      })();
+
+      document.querySelectorAll('.feat').forEach(f => {
+        f.addEventListener('mousemove', e => {
+          const r = f.getBoundingClientRect();
+          f.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          f.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
       });
-    }, observerOptions);
 
-    document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+      document.querySelectorAll('.win').forEach(w => {
+        w.addEventListener('mousemove', e => {
+          const r = w.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+          w.style.transform = 'perspective(1200px) rotateX(' + (-y * 6) + 'deg) rotateY(' + (x * 8) + 'deg) scale(1.015)';
+        });
+        w.addEventListener('mouseleave', () => { w.style.transform = ''; });
+      });
+
+      document.querySelectorAll('.magnetic').forEach(b => {
+        b.addEventListener('mousemove', e => {
+          const r = b.getBoundingClientRect();
+          b.style.transform = 'translate(' + ((e.clientX - r.left - r.width / 2) * 0.22) + 'px,' + ((e.clientY - r.top - r.height / 2) * 0.32) + 'px)';
+        });
+        b.addEventListener('mouseleave', () => { b.style.transform = ''; });
+      });
+    }
+
+    // Lightbox
+    const wins = [...document.querySelectorAll('.win')];
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    let cur = 0;
+
+    function showLb(i) {
+      cur = (i + wins.length) % wins.length;
+      const w = wins[cur], img = w.querySelector('img');
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt;
+      lbCap.innerHTML = '<b>' + w.dataset.title + '</b> · ' + (cur + 1) + ' / ' + wins.length;
+    }
+    function openLb(i) {
+      showLb(i);
+      lb.classList.add('open');
+      requestAnimationFrame(() => lb.classList.add('show'));
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() {
+      lb.classList.remove('show');
+      setTimeout(() => lb.classList.remove('open'), 300);
+      document.body.style.overflow = '';
+    }
+    wins.forEach((w, i) => w.addEventListener('click', () => openLb(i)));
+    document.getElementById('lbClose').addEventListener('click', closeLb);
+    document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); showLb(cur - 1); });
+    document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); showLb(cur + 1); });
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowLeft') showLb(cur - 1);
+      if (e.key === 'ArrowRight') showLb(cur + 1);
+    });
+
+    // Partículas
+    (function particles() {
+      if (reduceMotion) return;
+      const c = document.getElementById('particles'), ctx = c.getContext('2d');
+      let w, h, pts = [];
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      function resize() {
+        w = c.width = innerWidth * dpr; h = c.height = innerHeight * dpr;
+        c.style.width = innerWidth + 'px'; c.style.height = innerHeight + 'px';
+        const n = Math.min(70, Math.floor(innerWidth / 22));
+        pts = Array.from({ length: n }, () => ({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.25 * dpr, vy: (Math.random() - 0.5) * 0.25 * dpr,
+          r: (Math.random() * 1.3 + 0.5) * dpr
+        }));
+      }
+      resize(); addEventListener('resize', resize);
+      const maxD = 140 * dpr;
+      (function draw() {
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < pts.length; i++) {
+          const p = pts[i];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283);
+          ctx.fillStyle = 'rgba(167,139,250,0.7)'; ctx.fill();
+          for (let j = i + 1; j < pts.length; j++) {
+            const q = pts[j], d = Math.hypot(p.x - q.x, p.y - q.y);
+            if (d < maxD) {
+              ctx.strokeStyle = 'rgba(124,92,255,' + (0.22 * (1 - d / maxD)) + ')';
+              ctx.lineWidth = dpr * 0.7;
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      })();
+    })();
   </script>
 </body>
 </html>
