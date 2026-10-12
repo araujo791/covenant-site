@@ -682,6 +682,89 @@
       100% { opacity: 0.06; transform: scale(1.02); }
     }
 
+
+    /* Seletor das 3 opções de desktop */
+    .de-picker {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 8px 0 36px;
+    }
+    .de-opt {
+      text-align: left;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 20px 20px;
+      cursor: pointer;
+      font-family: inherit;
+      color: inherit;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .de-opt:hover {
+      transform: translateY(-4px);
+      border-color: #353849;
+      background: var(--bg-card-hover);
+    }
+    .de-opt.active {
+      border-color: rgba(124, 92, 255, 0.55);
+      background: linear-gradient(180deg, rgba(124, 92, 255, 0.16), var(--bg-card));
+      box-shadow: 0 10px 32px rgba(124, 92, 255, 0.18);
+      transform: translateY(-4px);
+    }
+    .de-opt .de-kicker {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+    }
+    .de-opt.active .de-kicker { color: #c4b5fd; }
+    .de-opt h3 {
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .de-opt p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      min-height: 4.4em;
+    }
+    .de-opt .de-tag {
+      display: inline-flex;
+      margin-top: 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #c4b5fd;
+      background: var(--accent-soft);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+    .de-detail {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 36px;
+      animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .de-detail h4 { margin-bottom: 8px; font-size: 1.05rem; }
+    .de-detail p { color: var(--text-muted); font-size: 0.92rem; }
+    .de-detail ul {
+      margin-top: 12px;
+      padding-left: 18px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .de-detail li { margin: 4px 0; }
+    @media (max-width: 860px) {
+      .de-picker { grid-template-columns: 1fr; }
+    }
+
     /* Hero Video Embed */
     .hero-video {
       margin: 48px auto 0;
@@ -966,6 +1049,33 @@
         </div>
       </div>
 
+
+      <h3 class="reveal-up" style="font-size: 1.15rem; margin-bottom: 8px; letter-spacing: -0.02em;">As 3 opções do instalador</h3>
+      <p class="reveal-up delay-1" style="color: var(--text-muted); margin-bottom: 18px; font-size: 0.95rem;">
+        A tela de seleção do Calamares ficou só com estas três. Clique para ver o que cada uma instala.
+      </p>
+      <div class="de-picker reveal-up delay-2" id="dePicker">
+        <button type="button" class="de-opt active" data-de="none">
+          <div class="de-kicker">Opção 1</div>
+          <h3>Sem Ambiente</h3>
+          <p>Base do sistema, sem desktop gráfico. Para quem monta o ambiente na mão.</p>
+          <span class="de-tag">Mínimo</span>
+        </button>
+        <button type="button" class="de-opt" data-de="plasma">
+          <div class="de-kicker">Opção 2</div>
+          <h3>Plasma Desktop</h3>
+          <p>KDE Plasma completo — o desktop padrão da ISO Covenant.</p>
+          <span class="de-tag">Padrão</span>
+        </button>
+        <button type="button" class="de-opt" data-de="hypr">
+          <div class="de-kicker">Opção 3</div>
+          <h3>Hyprland</h3>
+          <p>Compositor Wayland em tiles. Leve, teclado primeiro, visual moderno.</p>
+          <span class="de-tag">Tiling</span>
+        </button>
+      </div>
+      <div class="de-detail reveal-up delay-3" id="deDetail"></div>
+
       <h3 class="reveal-up" style="font-size: 1.15rem; margin-bottom: 16px; letter-spacing: -0.02em;">Por que o Calamares não abria</h3>
       <p class="reveal-up delay-1" style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;">
         O botão Launch Installer chamava <code style="font-family: var(--mono); font-size: 0.85rem; color: #c4b5fd;">calamares-online.sh</code>,
@@ -1077,6 +1187,39 @@
     // Smooth close mobile nav on click
     document.querySelectorAll('.nav-links a').forEach(a => {
       a.addEventListener('click', () => links.classList.remove('open'));
+    });
+
+
+    const deCopy = {
+      none: {
+        title: 'Sem Ambiente',
+        body: 'Instala o sistema sem sessão gráfica. Útil para servidor leve, WM próprio ou quem não quer Plasma nem Hyprland.',
+        items: ['Sem pacotes de desktop extra', 'Login em TTY após o primeiro boot', 'Otimizações Covenant continuam no first-boot']
+      },
+      plasma: {
+        title: 'Plasma Desktop',
+        body: 'Sessão KDE Plasma com o branding Covenant, wallpapers e o fluxo online do Calamares.',
+        items: ['Desktop completo (painel, configurações, Discover/Pamac depois)', 'Wayland por padrão no CachyOS', 'MachCtrl e Pamac entram no primeiro boot']
+      },
+      hypr: {
+        title: 'Hyprland',
+        body: 'Sessão tiling no Wayland. Os outros desktops (GNOME, XFCE, etc.) saem da lista de propósito.',
+        items: ['Compositor Hyprland', 'Atalhos e configuração via arquivos', 'Mesmas otimizações de hardware no sistema instalado']
+      }
+    };
+    const deDetail = document.getElementById('deDetail');
+    function renderDe(key) {
+      const d = deCopy[key];
+      deDetail.innerHTML = '<h4>' + d.title + '</h4><p>' + d.body + '</p><ul>' +
+        d.items.map(i => '<li>' + i + '</li>').join('') + '</ul>';
+    }
+    renderDe('none');
+    document.querySelectorAll('.de-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.de-opt').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderDe(btn.dataset.de);
+      });
     });
 
     // Intersection Observer para animações de Scroll
