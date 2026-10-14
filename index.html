@@ -717,13 +717,16 @@
         Covenant CachyOS
       </a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#uso">Uso</a></li>
-        <li><a href="#build">Build</a></li>
-        <li><a href="#otimizacoes">Otimizações</a></li>
-        <li><a href="#instalador">Instalador</a></li>
-        <li><a href="#extras">Extras</a></li>
+        <li><a data-i18n="i001" href="#uso">Uso</a></li>
+        <li><a data-i18n="i002" href="#build">Build</a></li>
+        <li><a data-i18n="i003" href="#otimizacoes">Otimizações</a></li>
+        <li><a data-i18n="i004" href="#instalador">Instalador</a></li>
+        <li><a data-i18n="i005" href="#extras">Extras</a></li>
       </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+      <div class="nav-right">
+        <div id="langSwitch"></div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+      </div>
     </div>
   </nav>
 
@@ -731,15 +734,15 @@
     <div class="container">
       <div class="badge">
         <span class="badge-dot"></span>
-        Em desenvolvimento ativo
+        <span data-i18n="i006">Em desenvolvimento ativo</span>
       </div>
-      <h1>Covenant CachyOS Builder</h1>
+      <h1 data-i18n="i007">Covenant CachyOS Builder</h1>
 
       <div class="typing-line" aria-live="polite">
         <span class="prompt">&gt;</span><span id="typed"></span><span class="caret"></span>
       </div>
 
-      <p class="lead">
+      <p data-i18n="i008" class="lead">
         Builder de ISO customizada do CachyOS (Desktop/Plasma), com branding próprio
         e otimizações de performance. A maior parte das otimizações usa
         <strong style="color: var(--text)">detecção automática de hardware</strong>
@@ -747,9 +750,9 @@
       </p>
 
       <div class="hero-actions">
-        <a href="https://drive.google.com/file/d/1dfTVyEJx5HihAvUDdVc-VOMYW7gZpWbA/view?usp=sharing" id="btn-download" class="btn btn-primary magnetic" target="_blank" rel="noopener noreferrer">📥 Download</a>
-        <a href="#uso" class="btn btn-ghost magnetic">Como usar</a>
-        <a href="#otimizacoes" class="btn btn-ghost magnetic">Ver otimizações</a>
+        <a data-i18n="i009" href="https://drive.google.com/file/d/1dfTVyEJx5HihAvUDdVc-VOMYW7gZpWbA/view?usp=sharing" id="btn-download" class="btn btn-primary magnetic" target="_blank" rel="noopener noreferrer">📥 Download</a>
+        <a data-i18n="i010" href="#uso" class="btn btn-ghost magnetic">Como usar</a>
+        <a data-i18n="i011" href="#otimizacoes" class="btn btn-ghost magnetic">Ver otimizações</a>
       </div>
 
       <div class="hero-video-wrap reveal-up delay-3">
@@ -766,19 +769,19 @@
       <div class="stats-grid">
         <div class="stat reveal-up">
           <div class="stat-num"><span data-count="10">0</span></div>
-          <div class="stat-label">slides de branding</div>
+          <div data-i18n="i012" class="stat-label">slides de branding</div>
         </div>
         <div class="stat reveal-up delay-1">
           <div class="stat-num"><span data-count="8">0</span></div>
-          <div class="stat-label">categorias de otimização</div>
+          <div data-i18n="i013" class="stat-label">categorias de otimização</div>
         </div>
         <div class="stat reveal-up delay-2">
           <div class="stat-num"><span data-count="3">0</span><span>×</span></div>
-          <div class="stat-label">retry automático no build</div>
+          <div data-i18n="i014" class="stat-label">retry automático no build</div>
         </div>
         <div class="stat reveal-up delay-3">
           <div class="stat-num"><span data-count="2">0</span></div>
-          <div class="stat-label">desktops: Plasma e Hyprland</div>
+          <div data-i18n="i015" class="stat-label">desktops: Plasma e Hyprland</div>
         </div>
       </div>
     </div>
@@ -787,43 +790,43 @@
   <!-- Uso -->
   <section id="uso">
     <div class="container">
-      <div class="section-label reveal-up">Começar</div>
-      <h2 class="section-title reveal-up delay-1">Como fazer o build</h2>
-      <p class="section-desc reveal-up delay-2">Dois modos de build. O modo RAM é mais rápido, mas exige bastante memória livre.</p>
+      <div data-i18n="i016" class="section-label reveal-up">Começar</div>
+      <h2 data-i18n="i017" class="section-title reveal-up delay-1">Como fazer o build</h2>
+      <p data-i18n="i018" class="section-desc reveal-up delay-2">Dois modos de build. O modo RAM é mais rápido, mas exige bastante memória livre.</p>
 
       <div class="grid grid-2 reveal-up delay-3" style="margin-bottom: 28px;">
         <div>
-          <div class="code-label">Build normal</div>
+          <div data-i18n="i019" class="code-label">Build normal</div>
           <div class="code-block">
             <div class="code-head"><i></i><i></i><i></i></div>
-            <button class="copy-btn" data-copy="bash build-iso.sh">Copiar</button>
+            <button data-i18n="i020" class="copy-btn" data-copy="bash build-iso.sh">Copiar</button>
             <div class="code-body"><code><span class="code-cmd">bash</span> build-iso.sh</code></div>
           </div>
         </div>
         <div>
-          <div class="code-label">Build em RAM</div>
+          <div data-i18n="i021" class="code-label">Build em RAM</div>
           <div class="code-block">
             <div class="code-head"><i></i><i></i><i></i></div>
-            <button class="copy-btn" data-copy="bash build-iso.sh -r">Copiar</button>
+            <button data-i18n="i022" class="copy-btn" data-copy="bash build-iso.sh -r">Copiar</button>
             <div class="code-body"><code><span class="code-cmd">bash</span> build-iso.sh <span class="code-flag">-r</span></code></div>
           </div>
         </div>
       </div>
 
-      <div class="code-label reveal-up delay-1">ISO gerada</div>
+      <div data-i18n="i023" class="code-label reveal-up delay-1">ISO gerada</div>
       <div class="code-block reveal-up delay-1" style="margin-bottom: 28px;">
         <div class="code-head"><i></i><i></i><i></i></div>
         <div class="code-body"><code>cachyos-live-iso/out/desktop/<span class="code-path">Covenant-CachyOS-*.iso</span></code></div>
       </div>
 
-      <div class="code-label reveal-up delay-2">Gravar no pendrive</div>
+      <div data-i18n="i024" class="code-label reveal-up delay-2">Gravar no pendrive</div>
       <div class="code-block reveal-up delay-2">
         <div class="code-head"><i></i><i></i><i></i></div>
-        <button class="copy-btn" data-copy="sudo dd if='<iso>' of=/dev/sdX bs=4M status=progress oflag=sync">Copiar</button>
+        <button data-i18n="i025" class="copy-btn" data-copy="sudo dd if='<iso>' of=/dev/sdX bs=4M status=progress oflag=sync">Copiar</button>
         <div class="code-body"><code><span class="code-cmd">sudo dd</span> if=<span class="code-path">'&lt;iso&gt;'</span> of=<span class="code-path">/dev/sdX</span> bs=4M status=progress oflag=sync</code></div>
       </div>
 
-      <div class="note reveal-up delay-3">
+      <div data-i18n="i026" class="note reveal-up delay-3">
         <strong>Nota:</strong> Esta versão é uma build <em>incremental e isolada</em> — começou 100% pura e cada customização foi reintroduzida e testada separadamente, para facilitar o diagnóstico (especialmente problemas de GPU/Wayland).
       </div>
     </div>
@@ -832,52 +835,52 @@
   <!-- O que o build faz -->
   <section id="build">
     <div class="container">
-      <div class="section-label reveal-up">Pipeline</div>
-      <h2 class="section-title reveal-up delay-1">O que o build faz</h2>
-      <p class="section-desc reveal-up delay-2">Do zero até a ISO final, com retry automático e correções defensivas.</p>
+      <div data-i18n="i027" class="section-label reveal-up">Pipeline</div>
+      <h2 data-i18n="i028" class="section-title reveal-up delay-1">O que o build faz</h2>
+      <p data-i18n="i029" class="section-desc reveal-up delay-2">Do zero até a ISO final, com retry automático e correções defensivas.</p>
 
       <div class="steps" id="steps">
         <div class="steps-fill" id="stepsFill"></div>
         <div class="step reveal-up">
           <div class="step-num">1</div>
           <div>
-            <h4>Dependências e mirrors</h4>
-            <p>Instala git, archiso e cachyos-rate-mirrors. Seleciona os mirrors mais rápidos e atualiza os bancos de pacotes.</p>
+            <h4 data-i18n="i030">Dependências e mirrors</h4>
+            <p data-i18n="i031">Instala git, archiso e cachyos-rate-mirrors. Seleciona os mirrors mais rápidos e atualiza os bancos de pacotes.</p>
           </div>
         </div>
         <div class="step reveal-up">
           <div class="step-num">2</div>
           <div>
-            <h4>Clone e patch do Calamares</h4>
-            <p>Clona o cachyos-live-iso oficial e patcha o <code>calamares-online.sh</code> para não reinstalar o Calamares (causa raiz do instalador não abrir + perda de branding).</p>
+            <h4 data-i18n="i032">Clone e patch do Calamares</h4>
+            <p data-i18n="i033">Clona o cachyos-live-iso oficial e patcha o <code>calamares-online.sh</code> para não reinstalar o Calamares (causa raiz do instalador não abrir + perda de branding).</p>
           </div>
         </div>
         <div class="step reveal-up">
           <div class="step-num">3</div>
           <div>
-            <h4>Pacotes e branding</h4>
-            <p>Substitui a lista de pacotes, aplica branding Covenant (10 slides PNG), copia wallpapers e limpa o instalador para oferecer só Plasma e Hyprland.</p>
+            <h4 data-i18n="i034">Pacotes e branding</h4>
+            <p data-i18n="i035">Substitui a lista de pacotes, aplica branding Covenant (10 slides PNG), copia wallpapers e limpa o instalador para oferecer só Plasma e Hyprland.</p>
           </div>
         </div>
         <div class="step reveal-up">
           <div class="step-num">4</div>
           <div>
-            <h4>Hooks de segurança</h4>
-            <p>Cria hook do pacman que reaplica branding se o pacote for reinstalado. Adiciona IgnorePkg para cachyos-calamares-next. Injeta covenant-target-setup sem sobrescrever o upstream.</p>
+            <h4 data-i18n="i036">Hooks de segurança</h4>
+            <p data-i18n="i037">Cria hook do pacman que reaplica branding se o pacote for reinstalado. Adiciona IgnorePkg para cachyos-calamares-next. Injeta covenant-target-setup sem sobrescrever o upstream.</p>
           </div>
         </div>
         <div class="step reveal-up">
           <div class="step-num">5</div>
           <div>
-            <h4>MachCtrl + auto-correção</h4>
-            <p>Builda machctrl-bin a partir do AUR e embute na ISO. Verifica com ldd se o Calamares carrega todas as libs; se não, corrige boost-libs automaticamente via Arch Linux Archive.</p>
+            <h4 data-i18n="i038">MachCtrl + auto-correção</h4>
+            <p data-i18n="i039">Builda machctrl-bin a partir do AUR e embute na ISO. Verifica com ldd se o Calamares carrega todas as libs; se não, corrige boost-libs automaticamente via Arch Linux Archive.</p>
           </div>
         </div>
         <div class="step reveal-up">
           <div class="step-num">6</div>
           <div>
-            <h4>ISO final</h4>
-            <p>Gera arquivos de otimização pós-instalação, configura makepkg.conf, nomeia a ISO como Covenant-CachyOS-&lt;data&gt;-&lt;sufixo&gt; e builda com retry automático (3×).</p>
+            <h4 data-i18n="i040">ISO final</h4>
+            <p data-i18n="i041">Gera arquivos de otimização pós-instalação, configura makepkg.conf, nomeia a ISO como Covenant-CachyOS-&lt;data&gt;-&lt;sufixo&gt; e builda com retry automático (3×).</p>
           </div>
         </div>
       </div>
@@ -887,96 +890,96 @@
   <!-- Otimizações -->
   <section id="otimizacoes">
     <div class="container">
-      <div class="section-label reveal-up">Performance</div>
-      <h2 class="section-title reveal-up delay-1">Otimizações pós-instalação</h2>
-      <p class="section-desc reveal-up delay-2">
+      <div data-i18n="i042" class="section-label reveal-up">Performance</div>
+      <h2 data-i18n="i043" class="section-title reveal-up delay-1">Otimizações pós-instalação</h2>
+      <p data-i18n="i044" class="section-desc reveal-up delay-2">
         Rodam <strong style="color: var(--text)">apenas no sistema instalado</strong>, uma única vez no primeiro boot
         (<code>covenant-first-boot.service</code>).
         Nunca na sessão live.
       </p>
 
       <div class="opt-tabs reveal-up delay-3" id="optTabs">
-        <button class="opt-tab active" data-tab="cpu">CPU</button>
-        <button class="opt-tab" data-tab="rede">Rede</button>
-        <button class="opt-tab" data-tab="memoria">Memória</button>
-        <button class="opt-tab" data-tab="io">I/O</button>
-        <button class="opt-tab" data-tab="irq">IRQ</button>
-        <button class="opt-tab" data-tab="fs">Filesystem</button>
-        <button class="opt-tab" data-tab="kernel">Kernel</button>
-        <button class="opt-tab" data-tab="outros">Outros</button>
+        <button data-i18n="i045" class="opt-tab active" data-tab="cpu">CPU</button>
+        <button data-i18n="i046" class="opt-tab" data-tab="rede">Rede</button>
+        <button data-i18n="i047" class="opt-tab" data-tab="memoria">Memória</button>
+        <button data-i18n="i048" class="opt-tab" data-tab="io">I/O</button>
+        <button data-i18n="i049" class="opt-tab" data-tab="irq">IRQ</button>
+        <button data-i18n="i050" class="opt-tab" data-tab="fs">Filesystem</button>
+        <button data-i18n="i051" class="opt-tab" data-tab="kernel">Kernel</button>
+        <button data-i18n="i052" class="opt-tab" data-tab="outros">Outros</button>
       </div>
 
       <div class="opt-panel active reveal-up delay-3" id="panel-cpu">
         <ul class="opt-list">
-          <li><span>Governor <strong>performance</strong> em todos os núcleos (também via <code>covenant-cpu-governor.service</code>)</span></li>
-          <li><span>GPU forçada para <code>power_dpm_force_performance_level=high</code></span></li>
-          <li><span>Kernel cmdline: <code>mitigations=off</code>, <code>processor.max_cstate=1</code>, <code>intel_idle.max_cstate=1</code>, <code>transparent_hugepage=always</code>, <code>nowatchdog</code>, <code>amdgpu.ppfeaturemask=0xffffffff</code>, <code>amd_pstate=active</code></span></li>
+          <li><span data-i18n="i053">Governor <strong>performance</strong> em todos os núcleos (também via <code>covenant-cpu-governor.service</code>)</span></li>
+          <li><span data-i18n="i054">GPU forçada para <code>power_dpm_force_performance_level=high</code></span></li>
+          <li><span data-i18n="i055">Kernel cmdline: <code>mitigations=off</code>, <code>processor.max_cstate=1</code>, <code>intel_idle.max_cstate=1</code>, <code>transparent_hugepage=always</code>, <code>nowatchdog</code>, <code>amdgpu.ppfeaturemask=0xffffffff</code>, <code>amd_pstate=active</code></span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-rede">
         <ul class="opt-list">
-          <li><span>TCP <strong>BBR</strong> + <code>fq_pie</code> como qdisc padrão</span></li>
-          <li><span>Buffers aumentados: <code>rmem_max</code>/<code>wmem_max</code> em 128 MB, <code>optmem_max=65536</code>, <code>somaxconn=8192</code>, <code>netdev_max_backlog=16384</code></span></li>
-          <li><span><code>tcp_timestamps=0</code>, <code>tcp_slow_start_after_idle=0</code>, <code>tcp_fin_timeout=15</code></span></li>
-          <li><span><code>tcp_fastopen=3</code> — Fast Open em cliente e servidor</span></li>
-          <li><span><code>tcp_mtu_probing=1</code> — MTU Path Discovery automático</span></li>
-          <li><span>Módulo <code>tcp_bbr</code> carregado no boot</span></li>
+          <li><span data-i18n="i056">TCP <strong>BBR</strong> + <code>fq_pie</code> como qdisc padrão</span></li>
+          <li><span data-i18n="i057">Buffers aumentados: <code>rmem_max</code>/<code>wmem_max</code> em 128 MB, <code>optmem_max=65536</code>, <code>somaxconn=8192</code>, <code>netdev_max_backlog=16384</code></span></li>
+          <li><span data-i18n="i058"><code>tcp_timestamps=0</code>, <code>tcp_slow_start_after_idle=0</code>, <code>tcp_fin_timeout=15</code></span></li>
+          <li><span data-i18n="i059"><code>tcp_fastopen=3</code> — Fast Open em cliente e servidor</span></li>
+          <li><span data-i18n="i060"><code>tcp_mtu_probing=1</code> — MTU Path Discovery automático</span></li>
+          <li><span data-i18n="i061">Módulo <code>tcp_bbr</code> carregado no boot</span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-memoria">
         <ul class="opt-list">
-          <li><span><code>swappiness=10</code>, <code>vfs_cache_pressure=50</code></span></li>
-          <li><span><code>page-cluster=0</code> — sem readahead de swap</span></li>
-          <li><span><code>compaction_proactiveness=0</code> — sem compactação proativa</span></li>
-          <li><span>Huge Pages: 512 páginas de 2 MB</span></li>
-          <li><span>ZRAM desativado (mascarado via systemd)</span></li>
-          <li><span>Dirty pages: <code>dirty_ratio=20</code>, <code>dirty_background_ratio=10</code></span></li>
+          <li><span data-i18n="i062"><code>swappiness=10</code>, <code>vfs_cache_pressure=50</code></span></li>
+          <li><span data-i18n="i063"><code>page-cluster=0</code> — sem readahead de swap</span></li>
+          <li><span data-i18n="i064"><code>compaction_proactiveness=0</code> — sem compactação proativa</span></li>
+          <li><span data-i18n="i065">Huge Pages: 512 páginas de 2 MB</span></li>
+          <li><span data-i18n="i066">ZRAM desativado (mascarado via systemd)</span></li>
+          <li><span data-i18n="i067">Dirty pages: <code>dirty_ratio=20</code>, <code>dirty_background_ratio=10</code></span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-io">
         <ul class="opt-list">
-          <li><span><strong>NVMe:</strong> scheduler <code>none</code>, <code>nr_requests=1024</code>, <code>read_ahead_kb=256</code></span></li>
-          <li><span><strong>SSD SATA:</strong> <code>mq-deadline</code>, <code>rq_affinity=2</code>, <code>add_random=0</code></span></li>
-          <li><span><strong>HDD:</strong> <code>bfq</code>, <code>read_ahead_kb=2048</code> + hdparm <code>-B 255</code> / <code>-S 0</code></span></li>
-          <li><span>Regras udev com prefixo <code>99-</code> (sobrescrevem defaults da CachyOS)</span></li>
-          <li><span><code>fstrim.timer</code> habilitado</span></li>
+          <li><span data-i18n="i068"><strong>NVMe:</strong> scheduler <code>none</code>, <code>nr_requests=1024</code>, <code>read_ahead_kb=256</code></span></li>
+          <li><span data-i18n="i069"><strong>SSD SATA:</strong> <code>mq-deadline</code>, <code>rq_affinity=2</code>, <code>add_random=0</code></span></li>
+          <li><span data-i18n="i070"><strong>HDD:</strong> <code>bfq</code>, <code>read_ahead_kb=2048</code> + hdparm <code>-B 255</code> / <code>-S 0</code></span></li>
+          <li><span data-i18n="i071">Regras udev com prefixo <code>99-</code> (sobrescrevem defaults da CachyOS)</span></li>
+          <li><span data-i18n="i072"><code>fstrim.timer</code> habilitado</span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-irq">
         <ul class="opt-list">
-          <li><span>IRQs de NVMe e AMD GPU direcionadas para a metade dos cores lógicos disponíveis</span></li>
-          <li><span>Serviço <code>covenant-irq-affinity.service</code></span></li>
+          <li><span data-i18n="i073">IRQs de NVMe e AMD GPU direcionadas para a metade dos cores lógicos disponíveis</span></li>
+          <li><span data-i18n="i074">Serviço <code>covenant-irq-affinity.service</code></span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-fs">
         <ul class="opt-list">
-          <li><span><strong>F2FS:</strong> <code>noatime</code>, <code>nodiscard</code>, <code>compress_algorithm=lz4</code>, <code>lazytime</code></span></li>
-          <li><span><strong>XFS:</strong> <code>noatime</code>, <code>nodiscard</code>, <code>logbsize=256k</code>, <code>allocsize=64m</code></span></li>
-          <li><span>Backup automático do <code>/etc/fstab</code> antes de qualquer alteração</span></li>
+          <li><span data-i18n="i075"><strong>F2FS:</strong> <code>noatime</code>, <code>nodiscard</code>, <code>compress_algorithm=lz4</code>, <code>lazytime</code></span></li>
+          <li><span data-i18n="i076"><strong>XFS:</strong> <code>noatime</code>, <code>nodiscard</code>, <code>logbsize=256k</code>, <code>allocsize=64m</code></span></li>
+          <li><span data-i18n="i077">Backup automático do <code>/etc/fstab</code> antes de qualquer alteração</span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-kernel">
         <ul class="opt-list">
-          <li><span><code>sched_autogroup_enable=0</code> — melhor throughput em workloads pesados</span></li>
-          <li><span><code>nmi_watchdog=0</code> — dupla garantia com <code>nowatchdog</code> no GRUB</span></li>
-          <li><span><code>perf_event_paranoid=-1</code> + <code>kptr_restrict=0</code> — profiling sem root</span></li>
-          <li><span><code>unprivileged_userns_clone=1</code> — Flatpak, containers rootless e Chromium sandbox</span></li>
+          <li><span data-i18n="i078"><code>sched_autogroup_enable=0</code> — melhor throughput em workloads pesados</span></li>
+          <li><span data-i18n="i079"><code>nmi_watchdog=0</code> — dupla garantia com <code>nowatchdog</code> no GRUB</span></li>
+          <li><span data-i18n="i080"><code>perf_event_paranoid=-1</code> + <code>kptr_restrict=0</code> — profiling sem root</span></li>
+          <li><span data-i18n="i081"><code>unprivileged_userns_clone=1</code> — Flatpak, containers rootless e Chromium sandbox</span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-outros">
         <ul class="opt-list">
-          <li><span><strong>Journald:</strong> persistente, comprimido, 256 MB / 1 semana. Coredumps desativados</span></li>
-          <li><span><strong>makepkg:</strong> <code>MAKEFLAGS="-j$(nproc)"</code>, <code>CFLAGS="-march=native"</code>, <code>RUSTFLAGS="-C target-cpu=native"</code></span></li>
-          <li><span><strong>Polkit:</strong> montagem/desmontagem sem senha para grupo wheel</span></li>
-          <li><span><strong>Limites:</strong> nofile e memlock elevados; inotify 524288 watches</span></li>
-          <li><span><strong>Verificação:</strong> <code>covenant-check.sh</code> mostra o status de todas as otimizações</span></li>
+          <li><span data-i18n="i082"><strong>Journald:</strong> persistente, comprimido, 256 MB / 1 semana. Coredumps desativados</span></li>
+          <li><span data-i18n="i083"><strong>makepkg:</strong> <code>MAKEFLAGS="-j$(nproc)"</code>, <code>CFLAGS="-march=native"</code>, <code>RUSTFLAGS="-C target-cpu=native"</code></span></li>
+          <li><span data-i18n="i084"><strong>Polkit:</strong> montagem/desmontagem sem senha para grupo wheel</span></li>
+          <li><span data-i18n="i085"><strong>Limites:</strong> nofile e memlock elevados; inotify 524288 watches</span></li>
+          <li><span data-i18n="i086"><strong>Verificação:</strong> <code>covenant-check.sh</code> mostra o status de todas as otimizações</span></li>
         </ul>
       </div>
     </div>
@@ -985,30 +988,30 @@
   <!-- Instalador -->
   <section id="instalador">
     <div class="container">
-      <div class="section-label reveal-up">Calamares</div>
-      <h2 class="section-title reveal-up delay-1">Instalador customizado</h2>
-      <p class="section-desc reveal-up delay-2">Modo instalação online, com branding Covenant e seleção enxuta de desktops.</p>
+      <div data-i18n="i087" class="section-label reveal-up">Calamares</div>
+      <h2 data-i18n="i088" class="section-title reveal-up delay-1">Instalador customizado</h2>
+      <p data-i18n="i089" class="section-desc reveal-up delay-2">Modo instalação online, com branding Covenant e seleção enxuta de desktops.</p>
 
       <div class="grid grid-3" style="margin-bottom: 40px;">
         <div class="card tilt reveal-up delay-1">
           <div class="card-icon purple">🎨</div>
-          <h3>Branding Covenant</h3>
-          <p>10 slides PNG próprios durante a instalação, aplicados via staging neutro + reescrita do show.qml.</p>
+          <h3 data-i18n="i090">Branding Covenant</h3>
+          <p data-i18n="i091">10 slides PNG próprios durante a instalação, aplicados via staging neutro + reescrita do show.qml.</p>
         </div>
         <div class="card tilt reveal-up delay-2">
           <div class="card-icon cyan">🖥️</div>
-          <h3>Plasma + Hyprland</h3>
-          <p>A tela de seleção oferece apenas “Sem Ambiente”, “Plasma Desktop” e “Hyprland”. Os demais desktops saem.</p>
+          <h3 data-i18n="i092">Plasma + Hyprland</h3>
+          <p data-i18n="i093">A tela de seleção oferece apenas “Sem Ambiente”, “Plasma Desktop” e “Hyprland”. Os demais desktops saem.</p>
         </div>
         <div class="card tilt reveal-up delay-3">
           <div class="card-icon green">⚙️</div>
-          <h3>Otimizações no target</h3>
-          <p>covenant-target-setup injetado no shellprocess-before-online.conf, preservando o upstream do CachyOS.</p>
+          <h3 data-i18n="i094">Otimizações no target</h3>
+          <p data-i18n="i095">covenant-target-setup injetado no shellprocess-before-online.conf, preservando o upstream do CachyOS.</p>
         </div>
       </div>
 
-      <h3 class="reveal-up" style="font-size: 1.3rem; margin-bottom: 16px; letter-spacing: -0.02em;">Por que o Calamares não abria</h3>
-      <p class="reveal-up delay-1" style="color: var(--text-muted); margin-bottom: 22px; font-size: 0.95rem;">
+      <h3 data-i18n="i096" class="reveal-up" style="font-size: 1.3rem; margin-bottom: 16px; letter-spacing: -0.02em;">Por que o Calamares não abria</h3>
+      <p data-i18n="i097" class="reveal-up delay-1" style="color: var(--text-muted); margin-bottom: 22px; font-size: 0.95rem;">
         O botão Launch Installer chamava <code>calamares-online.sh</code>,
         que fazia <code>pacman -Sy cachyos-calamares-next</code>
         antes de abrir o GUI. Em distro rolling isso quebra de dois jeitos:
@@ -1016,16 +1019,16 @@
 
       <div class="grid grid-2" style="margin-bottom: 24px;">
         <div class="card tilt reveal-up delay-2">
-          <h3 style="color: var(--red);">Instalador não abre</h3>
-          <p>O pacote novo vem compilado contra boost/qt/python que não existem no squashfs congelado da ISO.</p>
+          <h3 data-i18n="i098" style="color: var(--red);">Instalador não abre</h3>
+          <p data-i18n="i099">O pacote novo vem compilado contra boost/qt/python que não existem no squashfs congelado da ISO.</p>
         </div>
         <div class="card tilt reveal-up delay-3">
-          <h3 style="color: var(--orange);">Personalizações somem</h3>
-          <p>O pacman restaura show.qml, netinstall.yaml, packagechooser e shellprocess originais.</p>
+          <h3 data-i18n="i100" style="color: var(--orange);">Personalizações somem</h3>
+          <p data-i18n="i101">O pacman restaura show.qml, netinstall.yaml, packagechooser e shellprocess originais.</p>
         </div>
       </div>
 
-      <div class="note reveal-up">
+      <div data-i18n="i102" class="note reveal-up">
         <strong>Defesa em camadas:</strong> patch no calamares-online.sh (não reinstala), IgnorePkg no pacman.conf do live,
         e hook de reaplicação de branding fora de /etc/calamares/. Além disso, auto-correção de mismatch do boost-libs
         via Arch Linux Archive — se o ldd detectar lib faltando, baixa e instala a versão exata.
@@ -1036,44 +1039,44 @@
   <!-- Extras -->
   <section id="extras">
     <div class="container">
-      <div class="section-label reveal-up">Pré-instalados</div>
-      <h2 class="section-title reveal-up delay-1">Ferramentas embutidas</h2>
-      <p class="section-desc reveal-up delay-2">Instaladas automaticamente no primeiro boot do sistema instalado.</p>
+      <div data-i18n="i103" class="section-label reveal-up">Pré-instalados</div>
+      <h2 data-i18n="i104" class="section-title reveal-up delay-1">Ferramentas embutidas</h2>
+      <p data-i18n="i105" class="section-desc reveal-up delay-2">Instaladas automaticamente no primeiro boot do sistema instalado.</p>
 
       <div class="grid grid-2" style="margin-bottom: 60px;">
         <div class="card tilt reveal-up delay-1">
           <div class="card-icon purple">📊</div>
-          <h3>MachCtrl 3.0</h3>
-          <p>
+          <h3 data-i18n="i106">MachCtrl 3.0</h3>
+          <p data-i18n="i107">
             Monitor e otimizador de hardware nativo para CachyOS. Buildado a partir do AUR durante o build da ISO
             e embutido nela. Instalado via pacman -U no primeiro boot, sem internet ou AUR helper.
           </p>
-          <a href="machctrl.html" class="btn btn-primary magnetic" style="margin-top: 18px; padding: 9px 18px; font-size: 0.85rem;">Ver prints e detalhes →</a>
+          <a data-i18n="i108" href="machctrl.html" class="btn btn-primary magnetic" style="margin-top: 18px; padding: 9px 18px; font-size: 0.85rem;">Ver prints e detalhes →</a>
         </div>
         <div class="card tilt reveal-up delay-2">
           <div class="card-icon cyan">📦</div>
-          <h3>Pamac</h3>
-          <p>
+          <h3 data-i18n="i109">Pamac</h3>
+          <p data-i18n="i110">
             Gerenciador gráfico de pacotes com suporte a AUR, do repositório oficial do CachyOS.
             Instalado no primeiro boot junto com o MachCtrl, após confirmar resolução DNS.
           </p>
         </div>
       </div>
 
-      <div class="section-label reveal-up">Limpeza</div>
-      <h2 class="section-title reveal-up delay-1" style="margin-bottom: 28px;">ISO enxuta</h2>
+      <div data-i18n="i111" class="section-label reveal-up">Limpeza</div>
+      <h2 data-i18n="i112" class="section-title reveal-up delay-1" style="margin-bottom: 28px;">ISO enxuta</h2>
       <div class="grid grid-3">
         <div class="card tilt reveal-up delay-1">
-          <h3>Documentação</h3>
-          <p>Remove /usr/share/doc, man, info e gtk-doc.</p>
+          <h3 data-i18n="i113">Documentação</h3>
+          <p data-i18n="i114">Remove /usr/share/doc, man, info e gtk-doc.</p>
         </div>
         <div class="card tilt reveal-up delay-2">
-          <h3>Locales</h3>
-          <p>Mantém apenas pt_BR, en_US e en_GB.</p>
+          <h3 data-i18n="i115">Locales</h3>
+          <p data-i18n="i116">Mantém apenas pt_BR, en_US e en_GB.</p>
         </div>
         <div class="card tilt reveal-up delay-3">
-          <h3>Firmware</h3>
-          <p>Remove NICs enterprise/datacenter. Preserva WiFi e Bluetooth.</p>
+          <h3 data-i18n="i117">Firmware</h3>
+          <p data-i18n="i118">Remove NICs enterprise/datacenter. Preserva WiFi e Bluetooth.</p>
         </div>
       </div>
     </div>
@@ -1083,8 +1086,8 @@
   <section>
     <div class="container">
       <div class="status-box reveal-up">
-        <h3>🚧 Em desenvolvimento ativo</h3>
-        <p>
+        <h3 data-i18n="i119">🚧 Em desenvolvimento ativo</h3>
+        <p data-i18n="i120">
           Instalação online testada e funcional em hardware real — todas as otimizações,
           MachCtrl, Pamac e a correção automática do mismatch boost-libs/Calamares
           confirmados de ponta a ponta (build → live → instalação → primeiro boot).
@@ -1095,14 +1098,16 @@
 
   <footer>
     <div class="container">
-      <div class="foot-brand">Covenant CachyOS Builder</div><br />
-      build incremental e isolada
+      <div data-i18n="i121" class="foot-brand">Covenant CachyOS Builder</div><br />
+      <span data-i18n="i122">build incremental e isolada</span>
     </div>
   </footer>
 
   <button id="toTop" aria-label="Voltar ao topo">↑</button>
 
+  <script src="i18n.js"></script>
   <script>
+    const L = () => (window.i18n && window.i18n.lang) || 'pt';
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const finePointer = window.matchMedia('(pointer: fine)').matches;
 
@@ -1214,22 +1219,33 @@
 
     // Digitação no hero
     const typedEl = document.getElementById('typed');
-    const phrases = [
-      'bash build-iso.sh',
-      'detecção automática de hardware',
-      'Plasma + Hyprland, branding Covenant',
-      'otimizações no primeiro boot'
-    ];
+    const PH = {
+      pt: [
+        'bash build-iso.sh',
+        'detecção automática de hardware',
+        'Plasma + Hyprland, branding Covenant',
+        'otimizações no primeiro boot'
+      ],
+      en: [
+        'bash build-iso.sh',
+        'automatic hardware detection',
+        'Plasma + Hyprland, Covenant branding',
+        'optimizations on first boot'
+      ]
+    };
+    const phrases = () => PH[L()];
     if (reduceMotion) {
-      typedEl.textContent = phrases[0];
+      typedEl.textContent = phrases()[0];
+      addEventListener('langchange', () => { typedEl.textContent = phrases()[0]; });
     } else {
       let pi = 0, ci = 0, del = false;
+      addEventListener('langchange', () => { pi = 0; ci = 0; del = false; });
       (function type() {
-        const word = phrases[pi];
+        const word = phrases()[pi];
         typedEl.textContent = word.slice(0, ci);
         let speed = del ? 28 : 65;
         if (!del && ci === word.length) { speed = 1700; del = true; }
-        else if (del && ci === 0) { del = false; pi = (pi + 1) % phrases.length; speed = 350; }
+        else if (del && ci === 0) { del = false; pi = (pi + 1) % phrases().length; speed = 350; }
         else ci += del ? -1 : 1;
         setTimeout(type, speed);
       })();
@@ -1240,9 +1256,9 @@
       btn.addEventListener('click', async () => {
         try {
           await navigator.clipboard.writeText(btn.dataset.copy);
-          btn.textContent = 'Copiado ✓'; btn.classList.add('ok');
-        } catch (e) { btn.textContent = 'Erro'; }
-        setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('ok'); }, 1800);
+          btn.textContent = L() === 'en' ? 'Copied ✓' : 'Copiado ✓'; btn.classList.add('ok');
+        } catch (e) { btn.textContent = L() === 'en' ? 'Error' : 'Erro'; }
+        setTimeout(() => { btn.textContent = L() === 'en' ? 'Copy' : 'Copiar'; btn.classList.remove('ok'); }, 1800);
       });
     });
 

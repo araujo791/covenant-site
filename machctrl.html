@@ -283,6 +283,7 @@
       .hero { padding: 60px 0 36px; }
     }
     @media (max-width: 520px) { .feat-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) { .logo { font-size: 0; gap: 0; } .nav-inner .btn { padding: 8px 12px; font-size: 0.8rem; } }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -310,15 +311,18 @@
         <img src="images/favicon.png" alt="Logo Covenant" class="logo-mark" />
         Covenant CachyOS
       </a>
-      <a href="index.html" class="btn btn-ghost magnetic">← Voltar ao Início</a>
+      <div class="nav-right">
+        <div id="langSwitch"></div>
+        <a data-i18n="m001" href="index.html" class="btn btn-ghost magnetic">← Voltar ao Início</a>
+      </div>
     </div>
   </nav>
 
   <header class="hero">
     <div class="container">
-      <div class="badge">📊 Pré-instalado na Covenant CachyOS</div>
-      <h1>MachCtrl 3.0</h1>
-      <p class="lead">
+      <div data-i18n="m002" class="badge">📊 Pré-instalado na Covenant CachyOS</div>
+      <h1 data-i18n="m003">MachCtrl 3.0</h1>
+      <p data-i18n="m004" class="lead">
         Monitor e Otimizador de Hardware para Linux — versão nativa com Rust + Tauri v2 + React.<br>
         Visual dark/light moderno, backend Rust lendo os sensores direto de <code>/proc</code> e <code>/sys</code>
         (sem sysinfo, sem Electron, sem WebView pesado — usa o WebKitGTK do próprio sistema).
@@ -337,14 +341,14 @@
   <div class="features">
     <div class="container">
       <div class="feat-grid">
-        <a href="#g1" class="feat reveal-up"><span class="feat-ico">🧭</span><h3>Visão Geral</h3><p>Cards de CPU/Memória/GPU com gráficos ao vivo, Top Processos (RAM) e Rede</p></a>
-        <a href="#g3" class="feat reveal-up delay-1"><span class="feat-ico">🧠</span><h3>CPU</h3><p>Multi-socket (um card por CPU física), grid de núcleos com atividade + temperatura</p></a>
-        <a href="#g4" class="feat reveal-up delay-2"><span class="feat-ico">🧩</span><h3>Memória</h3><p>Uso + pentes DIMM (via dmidecode)</p></a>
-        <a href="#g5" class="feat reveal-up delay-3"><span class="feat-ico">💽</span><h3>Discos</h3><p>Todas as partições com barra de uso</p></a>
-        <a href="#g7" class="feat reveal-up"><span class="feat-ico">🌀</span><h3>Fans</h3><p>RPM/PWM com slider de controle e modo Auto</p></a>
-        <a href="#g6" class="feat reveal-up delay-1"><span class="feat-ico">🔋</span><h3>Energia</h3><p>Perfis Economia / Equilibrado / Desempenho</p></a>
-        <a href="#g8" class="feat reveal-up delay-2"><span class="feat-ico">🧹</span><h3>Limpeza</h3><p>Tarefas de limpeza do sistema</p></a>
-        <a href="#g9" class="feat reveal-up delay-3"><span class="feat-ico">🛠️</span><h3>Ajuste</h3><p>Otimizações do sistema</p><span class="soon">em construção</span></a>
+        <a href="#g1" class="feat reveal-up"><span class="feat-ico">🧭</span><h3 data-i18n="m005">Visão Geral</h3><p data-i18n="m006">Cards de CPU/Memória/GPU com gráficos ao vivo, Top Processos (RAM) e Rede</p></a>
+        <a href="#g3" class="feat reveal-up delay-1"><span class="feat-ico">🧠</span><h3 data-i18n="m007">CPU</h3><p data-i18n="m008">Multi-socket (um card por CPU física), grid de núcleos com atividade + temperatura</p></a>
+        <a href="#g4" class="feat reveal-up delay-2"><span class="feat-ico">🧩</span><h3 data-i18n="m009">Memória</h3><p data-i18n="m010">Uso + pentes DIMM (via dmidecode)</p></a>
+        <a href="#g5" class="feat reveal-up delay-3"><span class="feat-ico">💽</span><h3 data-i18n="m011">Discos</h3><p data-i18n="m012">Todas as partições com barra de uso</p></a>
+        <a href="#g7" class="feat reveal-up"><span class="feat-ico">🌀</span><h3 data-i18n="m013">Fans</h3><p data-i18n="m014">RPM/PWM com slider de controle e modo Auto</p></a>
+        <a href="#g6" class="feat reveal-up delay-1"><span class="feat-ico">🔋</span><h3 data-i18n="m015">Energia</h3><p data-i18n="m016">Perfis Economia / Equilibrado / Desempenho</p></a>
+        <a href="#g8" class="feat reveal-up delay-2"><span class="feat-ico">🧹</span><h3 data-i18n="m017">Limpeza</h3><p data-i18n="m018">Tarefas de limpeza do sistema</p></a>
+        <a href="#g9" class="feat reveal-up delay-3"><span class="feat-ico">🛠️</span><h3 data-i18n="m019">Ajuste</h3><p data-i18n="m020">Otimizações do sistema</p><span data-i18n="m021" class="soon">em construção</span></a>
       </div>
     </div>
   </div>
@@ -352,8 +356,8 @@
   <section>
     <div class="container">
       <div class="section-head">
-        <div class="section-label reveal-up">Interface</div>
-        <h2 class="section-title reveal-up delay-1">Visão Detalhada</h2>
+        <div data-i18n="m022" class="section-label reveal-up">Interface</div>
+        <h2 data-i18n="m023" class="section-title reveal-up delay-1">Visão Detalhada</h2>
       </div>
 
       <div class="gallery-grid">
@@ -361,11 +365,11 @@
         <div class="gallery-item" id="g1">
           <div class="g-text reveal-up">
             <span class="g-num">01 / 09</span>
-            <h3>Visão Geral do Sistema</h3>
-            <p>Dashboard central com resumo da CPU, RAM, GPU, Rede e Top Processos. Ajusta-se perfeitamente a diferentes setups, desde notebooks até estações Xeon.</p>
+            <h3 data-i18n="m024">Visão Geral do Sistema</h3>
+            <p data-i18n="m025">Dashboard central com resumo da CPU, RAM, GPU, Rede e Top Processos. Ajusta-se perfeitamente a diferentes setups, desde notebooks até estações Xeon.</p>
           </div>
           <div class="win reveal-up delay-1" data-title="Visão Geral do Sistema">
-            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — overview</span></div>
+            <div data-i18n="m026" class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — overview</span></div>
             <div class="win-body"><img src="images/Captura_de_tela_20261010_111819.png" alt="Visão Geral - Xeon" loading="lazy" /></div>
           </div>
         </div>
@@ -373,11 +377,11 @@
         <div class="gallery-item" id="g2">
           <div class="g-text reveal-up">
             <span class="g-num">02 / 09</span>
-            <h3>Dashboard Alternativo (Notebook)</h3>
-            <p>Visão geral detalhando o estado da bateria, tensão e frequências de setups mais focados em eficiência.</p>
+            <h3 data-i18n="m027">Dashboard Alternativo (Notebook)</h3>
+            <p data-i18n="m028">Visão geral detalhando o estado da bateria, tensão e frequências de setups mais focados em eficiência.</p>
           </div>
           <div class="win reveal-up delay-1" data-title="Dashboard Alternativo (Notebook)">
-            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — notebook</span></div>
+            <div data-i18n="m029" class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — notebook</span></div>
             <div class="win-body"><img src="images/Captura_de_tela_20261010_111739.png" alt="Visão Geral - Inspiron" loading="lazy" /></div>
           </div>
         </div>
@@ -385,11 +389,11 @@
         <div class="gallery-item" id="g3">
           <div class="g-text reveal-up">
             <span class="g-num">03 / 09</span>
-            <h3>Monitoramento de CPU Avançado</h3>
-            <p>Acompanhamento individual de uso, temperatura e frequência de cada thread e núcleo do processador.</p>
+            <h3 data-i18n="m030">Monitoramento de CPU Avançado</h3>
+            <p data-i18n="m031">Acompanhamento individual de uso, temperatura e frequência de cada thread e núcleo do processador.</p>
           </div>
           <div class="win reveal-up delay-1" data-title="Monitoramento de CPU Avançado">
-            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — cpu</span></div>
+            <div data-i18n="m032" class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — cpu</span></div>
             <div class="win-body"><img src="images/Captura_de_tela_20261010_111829.png" alt="Monitoramento de CPU" loading="lazy" /></div>
           </div>
         </div>
@@ -397,11 +401,11 @@
         <div class="gallery-item" id="g4">
           <div class="g-text reveal-up">
             <span class="g-num">04 / 09</span>
-            <h3>Gestão de Memória</h3>
-            <p>Visualização dos pentes instalados, velocidade (MT/s), voltagem e slots disponíveis na placa-mãe.</p>
+            <h3 data-i18n="m033">Gestão de Memória</h3>
+            <p data-i18n="m034">Visualização dos pentes instalados, velocidade (MT/s), voltagem e slots disponíveis na placa-mãe.</p>
           </div>
           <div class="win reveal-up delay-1" data-title="Gestão de Memória">
-            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — memória</span></div>
+            <div data-i18n="m035" class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — memória</span></div>
             <div class="win-body"><img src="images/Captura_de_tela_20261010_111840.png" alt="Gestão de Memória" loading="lazy" /></div>
           </div>
         </div>
@@ -409,11 +413,11 @@
         <div class="gallery-item" id="g5">
           <div class="g-text reveal-up">
             <span class="g-num">05 / 09</span>
-            <h3>Métricas de Armazenamento (Discos)</h3>
-            <p>Taxa de leitura e escrita em tempo real, capacidade total e sistemas de arquivos (F2FS, BTRFS, NTFS3, etc.) de todas as unidades mapeadas.</p>
+            <h3 data-i18n="m036">Métricas de Armazenamento (Discos)</h3>
+            <p data-i18n="m037">Taxa de leitura e escrita em tempo real, capacidade total e sistemas de arquivos (F2FS, BTRFS, NTFS3, etc.) de todas as unidades mapeadas.</p>
           </div>
           <div class="win reveal-up delay-1" data-title="Métricas de Armazenamento (Discos)">
-            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — discos</span></div>
+            <div data-i18n="m038" class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — discos</span></div>
             <div class="win-body"><img src="images/Captura_de_tela_20261010_111849.png" alt="Métricas de Discos" loading="lazy" /></div>
           </div>
         </div>
@@ -421,11 +425,11 @@
         <div class="gallery-item" id="g6">
           <div class="g-text reveal-up">
             <span class="g-num">06 / 09</span>
-            <h3>Perfis de Energia</h3>
-            <p>Ajuste simplificado para os modos de Desempenho, Equilibrado e Economia de Bateria com detalhamento de saúde das células.</p>
+            <h3 data-i18n="m039">Perfis de Energia</h3>
+            <p data-i18n="m040">Ajuste simplificado para os modos de Desempenho, Equilibrado e Economia de Bateria com detalhamento de saúde das células.</p>
           </div>
           <div class="win reveal-up delay-1" data-title="Perfis de Energia">
-            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — energia</span></div>
+            <div data-i18n="m041" class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — energia</span></div>
             <div class="win-body"><img src="images/Captura_de_tela_20261010_111756.png" alt="Perfis de Energia" loading="lazy" /></div>
           </div>
         </div>
@@ -433,11 +437,11 @@
         <div class="gallery-item" id="g7">
           <div class="g-text reveal-up">
             <span class="g-num">07 / 09</span>
-            <h3>Controle de Ventoinhas (Fans)</h3>
-            <p>Controle preciso de RPM com suporte a curvas customizadas e modos Automático, Manual e Máximo via PWM.</p>
+            <h3 data-i18n="m042">Controle de Ventoinhas (Fans)</h3>
+            <p data-i18n="m043">Controle preciso de RPM com suporte a curvas customizadas e modos Automático, Manual e Máximo via PWM.</p>
           </div>
           <div class="win reveal-up delay-1" data-title="Controle de Ventoinhas (Fans)">
-            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — fans</span></div>
+            <div data-i18n="m044" class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — fans</span></div>
             <div class="win-body"><img src="images/Captura_de_tela_20261010_111856.png" alt="Controle de Ventoinhas" loading="lazy" /></div>
           </div>
         </div>
@@ -445,11 +449,11 @@
         <div class="gallery-item" id="g8">
           <div class="g-text reveal-up">
             <span class="g-num">08 / 09</span>
-            <h3>Limpeza do Sistema</h3>
-            <p>Manutenção ágil para remover pacotes órfãos, esvaziar cache do Pacman, limpar logs do Journal e muito mais em um clique.</p>
+            <h3 data-i18n="m045">Limpeza do Sistema</h3>
+            <p data-i18n="m046">Manutenção ágil para remover pacotes órfãos, esvaziar cache do Pacman, limpar logs do Journal e muito mais em um clique.</p>
           </div>
           <div class="win reveal-up delay-1" data-title="Limpeza do Sistema">
-            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — limpeza</span></div>
+            <div data-i18n="m047" class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — limpeza</span></div>
             <div class="win-body"><img src="images/Captura_de_tela_20261010_111907.png" alt="Limpeza do Sistema" loading="lazy" /></div>
           </div>
         </div>
@@ -457,11 +461,11 @@
         <div class="gallery-item" id="g9">
           <div class="g-text reveal-up">
             <span class="g-num">09 / 09</span>
-            <h3>Ajustes</h3>
-            <p>Alguns ajustes para melhor aproveitar seu hardware, rede, discos, serviços e memoria.</p>
+            <h3 data-i18n="m048">Ajustes</h3>
+            <p data-i18n="m049">Alguns ajustes para melhor aproveitar seu hardware, rede, discos, serviços e memoria.</p>
           </div>
           <div class="win reveal-up delay-1" data-title="Ajustes">
-            <div class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — ajustes</span></div>
+            <div data-i18n="m050" class="win-bar"><i></i><i></i><i></i><span class="win-title">machctrl — ajustes</span></div>
             <div class="win-body"><img src="images/Captura_de_tela_20261010_111914.png" alt="Ajustes" loading="lazy" /></div>
           </div>
         </div>
@@ -472,8 +476,8 @@
 
   <footer>
     <div class="container">
-      <div class="foot-brand">MachCtrl 3.0</div><br />
-      Desenvolvido para Arch
+      <div data-i18n="m051" class="foot-brand">MachCtrl 3.0</div><br />
+      <span data-i18n="m052">Desenvolvido para Arch</span>
     </div>
   </footer>
 
@@ -488,6 +492,7 @@
 
   <button id="toTop" aria-label="Voltar ao topo">↑</button>
 
+  <script src="i18n.js"></script>
   <script>
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const finePointer = window.matchMedia('(pointer: fine)').matches;
@@ -582,6 +587,8 @@
       if (e.key === 'ArrowLeft') showLb(cur - 1);
       if (e.key === 'ArrowRight') showLb(cur + 1);
     });
+
+    addEventListener('langchange', () => { if (lb.classList.contains('open')) showLb(cur); });
 
     // Partículas
     (function particles() {
