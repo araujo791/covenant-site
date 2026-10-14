@@ -272,7 +272,7 @@
     host.innerHTML =
       '<div class="lang" role="group" aria-label="Language / Idioma" data-l="pt">' +
       '<span class="lang-glider"></span>' +
-      '<button type="button" data-l="pt" title="Português" aria-pressed="true">PT</button>' +
+      '<button type="button" data-l="pt" title="Português" aria-pressed="true">BR</button>' +
       '<button type="button" data-l="en" title="English" aria-pressed="false">EN</button>' +
       '</div>';
     host.querySelectorAll('button').forEach(function (b) {
