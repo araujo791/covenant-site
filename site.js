@@ -1,4 +1,4 @@
-/* Shared interactions. No framework, pointer loops, or background canvas. */
+/* Shared navigation, content and accessibility. Decorative effects live in effects.js. */
 (() => {
   'use strict';
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -156,7 +156,7 @@
   const wins = [...document.querySelectorAll('.win')];
   let currentImage = 0;
   let returnFocus;
-  const background = [...document.querySelectorAll('main, nav, footer, #toTop')];
+  const background = [...document.querySelectorAll('main, nav, footer, #toTop, #fxToggle')];
   function showImage(i) {
     currentImage = (i + wins.length) % wins.length;
     const win = wins[currentImage];

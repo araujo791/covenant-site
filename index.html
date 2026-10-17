@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-fx="off">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Covenant CachyOS Builder</title>
   <link rel="icon" type="image/svg+xml" href="images/covenant-mark.svg" />
   <meta name="description" content="Builder de ISO customizada do CachyOS com branding próprio e otimizações de performance com detecção automática de hardware." />
-  <meta name="theme-color" content="#111310" />
+  <meta name="theme-color" content="#070b16" />
   <link rel="preload" href="fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="design.css" />
 </head>
@@ -35,6 +35,7 @@
   </nav>
 
   <main id="main-content">
+  <div class="ambient-mesh" aria-hidden="true"><span></span><span></span><span></span></div>
   <header class="hero">
     <div class="container hero-layout">
       <div class="hero-copy">
@@ -59,16 +60,19 @@
 
       </div>
 
+      <div class="system-readout" aria-hidden="true"><span class="readout-prompt">❯</span><span class="readout-path">covenant</span><span class="readout-separator">~/</span><span class="readout-command">hardware.auto_detect()</span><span class="readout-caret"></span></div>
       <div class="hero-footnote"><span class="micro-dot"></span><span data-i18n="d_based">Base CachyOS. Identidade Covenant.</span></div>
       </div>
       <div class="hero-art" aria-hidden="true">
         <div class="art-meta"><span>CV / SYSTEM CORE</span><span>01 — ∞</span></div>
         <div class="core-scene">
+          <canvas class="neural-field"></canvas>
+          <div class="holo-floor"></div><div class="orbit orbit-scanner"></div>
           <div class="orbit orbit-outer"></div><div class="orbit orbit-inner"></div>
           <div class="orbit-cross cross-one"></div><div class="orbit-cross cross-two"></div>
           <div class="core-stack">
             <div class="core-layer layer-bottom"></div><div class="core-layer layer-middle"></div>
-            <div class="core-layer layer-top"><img src="images/covenant-mark.svg" alt="" /></div>
+            <div class="core-layer layer-top"><span class="chip-circuit"></span><img src="images/covenant-mark.svg" alt="" /></div>
           </div>
           <div class="art-tag tag-top"><span class="micro-dot"></span>HARDWARE AWARE</div>
           <div class="art-tag tag-bottom">ARCH BASED <span>↗</span></div>
@@ -447,6 +451,8 @@
   <button id="toTop" aria-label="Voltar ao topo">↑</button>
 
   <script src="i18n.js"></script>
+  <button class="fx-toggle" id="fxToggle" type="button" aria-pressed="false" aria-label="Efeitos visuais" title="Efeitos visuais"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8L20 9h-7l1-7Z"/></svg><span>FX</span></button>
   <script src="site.js"></script>
+  <script src="effects.js"></script>
 </body>
 </html>

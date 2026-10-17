@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-fx="off">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MachCtrl - Detalhes e Prints</title>
   <link rel="icon" type="image/png" href="images/favicon.png" />
-  <meta name="theme-color" content="#111310" />
+  <meta name="theme-color" content="#070b16" />
   <link rel="preload" href="fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="design.css" />
 </head>
@@ -27,6 +27,7 @@
   </nav>
 
   <main id="main-content">
+  <div class="ambient-mesh" aria-hidden="true"><span></span><span></span><span></span></div>
   <header class="hero">
     <div class="container">
       <div data-i18n="m002" class="badge">Pré-instalado na Covenant CachyOS</div>
@@ -207,6 +208,8 @@
   <button id="toTop" aria-label="Voltar ao topo">↑</button>
 
   <script src="i18n.js"></script>
+  <button class="fx-toggle" id="fxToggle" type="button" aria-pressed="false" aria-label="Efeitos visuais" title="Efeitos visuais"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8L20 9h-7l1-7Z"/></svg><span>FX</span></button>
   <script src="site.js"></script>
+  <script src="effects.js"></script>
 </body>
 </html>
