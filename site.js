@@ -20,8 +20,8 @@
   function icon(name) {
     return '<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">' + iconPaths[name] + '</svg>';
   }
-  document.querySelectorAll('.card-icon').forEach((el, i) => {
-    el.innerHTML = icon(['grid', 'grid', 'box', 'chart', 'box'][i % 5]);
+  document.querySelectorAll('.card-icon').forEach(el => {
+    el.innerHTML = icon(el.dataset.icon || 'grid');
     el.setAttribute('aria-hidden', 'true');
   });
   document.querySelectorAll('.feat-ico').forEach((el, i) => {

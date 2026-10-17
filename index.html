@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Covenant CachyOS Builder</title>
-  <link rel="icon" type="image/svg+xml" href="images/covenant-mark.svg" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
   <meta name="description" content="Builder de ISO customizada do CachyOS com branding próprio e otimizações de performance com detecção automática de hardware." />
   <meta name="theme-color" content="#070b16" />
   <link rel="preload" href="fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -16,9 +16,9 @@
   <a class="skip-link" href="#main-content" data-i18n="d_skip">Pular para o conteúdo</a>
   <nav id="nav">
     <div class="container nav-inner">
-      <a href="#" class="logo">
-        <img src="images/covenant-mark.svg" alt="" class="logo-mark" />
-        <span class="brand-name">covenant<span class="brand-sub">CACHYOS BUILDER</span></span>
+      <a href="#" class="logo" aria-label="Covenant CachyOS">
+        <img src="images/favicon.png" alt="MachCtrl" class="logo-mark" width="500" height="500" />
+        <span class="brand-name"><img src="images/Covenant_boot.png" alt="Covenant" class="brand-wordmark" width="4800" height="1221" /><span class="brand-sub">CACHYOS BUILDER</span></span>
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a data-i18n="i001" href="#uso">Uso</a></li>
@@ -39,7 +39,8 @@
   <header class="hero">
     <div class="container hero-layout">
       <div class="hero-copy">
-      <div class="hero-kicker"><span class="kicker-line"></span> COVENANT / CACHYOS</div>
+      <div class="hero-kicker"><span class="kicker-line"></span> CACHYOS / CUSTOM ISO BUILDER</div>
+      <img class="hero-wordmark" src="images/Covenant_boot.png" alt="Covenant" width="4800" height="1221" fetchpriority="high" />
       <div class="badge">
         <span class="badge-dot"></span>
         <span data-i18n="i006">Em desenvolvimento ativo</span>
@@ -64,7 +65,7 @@
       <div class="hero-footnote"><span class="micro-dot"></span><span data-i18n="d_based">Base CachyOS. Identidade Covenant.</span></div>
       </div>
       <div class="hero-art" aria-hidden="true">
-        <div class="art-meta"><span>CV / SYSTEM CORE</span><span>01 — ∞</span></div>
+        <div class="art-meta"><span>COVENANT × MACHCTRL</span><span>01 — ∞</span></div>
         <div class="core-scene">
           <canvas class="neural-field"></canvas>
           <div class="holo-floor"></div><div class="orbit orbit-scanner"></div>
@@ -72,8 +73,9 @@
           <div class="orbit-cross cross-one"></div><div class="orbit-cross cross-two"></div>
           <div class="core-stack">
             <div class="core-layer layer-bottom"></div><div class="core-layer layer-middle"></div>
-            <div class="core-layer layer-top"><span class="chip-circuit"></span><img src="images/covenant-mark.svg" alt="" /></div>
+            <div class="core-layer layer-top"><span class="chip-circuit"></span></div>
           </div>
+          <img class="core-brand-emblem" src="images/favicon.png" alt="" width="500" height="500" />
           <div class="art-tag tag-top"><span class="micro-dot"></span>HARDWARE AWARE</div>
           <div class="art-tag tag-bottom">ARCH BASED <span>↗</span></div>
           <span class="coordinate coord-left">X 08.24</span><span class="coordinate coord-right">Y 64.00</span>
@@ -122,7 +124,7 @@
           <a class="video-poster" href="https://www.youtube.com/watch?v=Dfk93Atdj3I" data-video="https://www.youtube.com/embed/Dfk93Atdj3I?si=CDuF2HIxKee4FfHu" target="_blank" rel="noopener noreferrer">
             <img class="poster-backdrop" src="images/Captura_de_tela_20261010_111819.png" alt="" width="1920" height="1038" loading="lazy" />
             <span class="play-ring"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7V5Z"/></svg></span>
-            <span class="poster-title">covenant<span>IN MOTION</span></span>
+            <span class="poster-title"><img src="images/Covenant_boot.png" alt="Covenant" width="4800" height="1221" /><span>IN MOTION</span></span>
             <span class="poster-caption" data-i18n="d_watch">Assistir à apresentação</span>
           </a>
         </div>
@@ -337,17 +339,17 @@
 
       <div class="grid grid-3" style="margin-bottom: 40px;">
         <div class="card tilt reveal-up delay-1">
-          <div class="card-icon purple">🎨</div>
+          <div class="card-icon purple" data-icon="grid">🎨</div>
           <h3 data-i18n="i090">Branding Covenant</h3>
           <p data-i18n="i091">10 slides PNG próprios durante a instalação, aplicados via staging neutro + reescrita do show.qml.</p>
         </div>
         <div class="card tilt reveal-up delay-2">
-          <div class="card-icon cyan">🖥️</div>
+          <div class="card-icon cyan" data-icon="grid">🖥️</div>
           <h3 data-i18n="i092">Plasma + Hyprland</h3>
           <p data-i18n="i093">A tela de seleção oferece apenas “Sem Ambiente”, “Plasma Desktop” e “Hyprland”. Os demais desktops saem.</p>
         </div>
         <div class="card tilt reveal-up delay-3">
-          <div class="card-icon green">⚙️</div>
+          <div class="card-icon green" data-icon="sliders">⚙️</div>
           <h3 data-i18n="i094">Otimizações no target</h3>
           <p data-i18n="i095">covenant-target-setup injetado no shellprocess-before-online.conf, preservando o upstream do CachyOS.</p>
         </div>
@@ -389,8 +391,7 @@
       <div class="grid grid-2" style="margin-bottom: 60px;">
         <div class="card product-card reveal-up delay-1">
           <a class="product-preview" href="machctrl.html" aria-label="MachCtrl"><img src="images/Captura_de_tela_20261010_111819.png" alt="Interface do MachCtrl com monitoramento de hardware" loading="lazy" width="1920" height="1038" /></a>
-          <div class="card-icon purple">📊</div>
-          <h3 data-i18n="i106">MachCtrl 3.0</h3>
+          <div class="product-identity"><img src="images/favicon.png" alt="Logo MachCtrl" class="product-logo" width="500" height="500" loading="lazy" /><div><span class="product-eyebrow" data-i18n="d_native_tool">Controle de hardware</span><h3 data-i18n="i106">MachCtrl 3.0</h3></div></div>
           <p data-i18n="i107">
             Monitor e otimizador de hardware nativo para CachyOS. Buildado a partir do AUR durante o build da ISO
             e embutido nela. Instalado via pacman -U no primeiro boot, sem internet ou AUR helper.
@@ -398,7 +399,7 @@
           <a data-i18n="i108" href="machctrl.html" class="btn btn-primary" style="margin-top: 18px; padding: 9px 18px; font-size: 0.85rem;">Ver prints e detalhes →</a>
         </div>
         <div class="card tilt reveal-up delay-2">
-          <div class="card-icon cyan">📦</div>
+          <div class="card-icon cyan" data-icon="box">📦</div>
           <h3 data-i18n="i109">Pamac</h3>
           <p data-i18n="i110">
             Gerenciador gráfico de pacotes com suporte a AUR, do repositório oficial do CachyOS.
@@ -443,7 +444,7 @@
   </main>
   <footer>
     <div class="container">
-      <div data-i18n="i121" class="foot-brand">Covenant CachyOS Builder</div><br />
+      <a class="footer-brand" href="index.html"><img src="images/Covenant_boot.png" alt="Covenant" width="4800" height="1221" loading="lazy" /><span>CACHYOS BUILDER</span></a>
       <span data-i18n="i122">build incremental e isolada</span>
     </div>
   </footer>

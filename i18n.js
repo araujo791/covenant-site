@@ -6,6 +6,7 @@
   'use strict';
 
   var EN = {
+    d_native_tool: `Hardware control`,
     d_skip: `Skip to content`,
     d_hero: `Your hardware.<br>Your potential.<br><span>Without limits.</span>`,
     d_download: `Download ISO <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>`,
@@ -161,6 +162,7 @@
 
   // Atributos (alt, aria-label, data-title), título e meta description — chave = texto em português
   var ATTR = {
+    'Logo MachCtrl': 'MachCtrl logo',
     'Voltar ao topo': 'Back to top',
     'Logo Covenant': 'Covenant logo',
     'Imagem ampliada': 'Enlarged image',
