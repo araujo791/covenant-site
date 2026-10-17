@@ -6,13 +6,24 @@
   'use strict';
 
   var EN = {
+    d_skip: `Skip to content`,
+    d_hero: `Your hardware.<br>Your potential.<br><span>Without limits.</span>`,
+    d_download: `Download ISO <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>`,
+    d_based: `CachyOS foundation. Covenant identity.`,
+    d_scroll: `Explore what is inside`,
+    d_action_label: `In motion`,
+    d_watch: `Watch the presentation`,
+    d_action_title: `A new perspective.<br>The same control.`,
+    d_action_desc: `Meet the Covenant experience: an environment with its own identity, from the first boot to your next project.`,
+    d_mach_tagline: `Every detail. Under your control.`,
+
     // ───── index.html ─────
     i001: `Usage`,
     i003: `Optimizations`,
     i004: `Installer`,
     i006: `Active development`,
     i008: `Custom CachyOS ISO builder (Desktop/Plasma), with its own branding and performance optimizations. Most optimizations use <strong style="color: var(--text)">automatic hardware detection</strong> — they work on any machine.`,
-    i010: `How to use`,
+    i010: `How to use <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>`,
     i011: `View optimizations`,
     i012: `branding slides`,
     i013: `optimization categories`,
@@ -98,13 +109,13 @@
     i114: `Removes /usr/share/doc, man, info and gtk-doc.`,
     i116: `Keeps only pt_BR, en_US and en_GB.`,
     i118: `Removes enterprise/datacenter NICs. Keeps WiFi and Bluetooth.`,
-    i119: `🚧 Active development`,
+    i119: `Active development`,
     i120: `Online installation tested and working on real hardware — all optimizations, MachCtrl, Pamac and the automatic boost-libs/Calamares mismatch fix confirmed end to end (build → live → install → first boot).`,
     i122: `incremental, isolated build`,
 
     // ───── machctrl.html ─────
     m001: `← Back to Home`,
-    m002: `📊 Pre-installed on Covenant CachyOS`,
+    m002: `Pre-installed on Covenant CachyOS`,
     m004: `Hardware Monitor and Optimizer for Linux — native version built with Rust + Tauri v2 + React.<br> Modern dark/light look, with a Rust backend reading sensors straight from <code>/proc</code> and <code>/sys</code> (no sysinfo, no Electron, no heavy WebView — it uses the system's own WebKitGTK).`,
     m005: `Overview`,
     m006: `CPU/Memory/GPU cards with live charts, Top Processes (RAM) and Network`,
