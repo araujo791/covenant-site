@@ -6,6 +6,7 @@
   'use strict';
 
   var EN = {
+    m_windows_download: `Download for Windows`,
     d_native_tool: `Hardware control`,
     d_skip: `Skip to content`,
     d_hero: `Your hardware.<br>Your potential.<br><span>Without limits.</span>`,

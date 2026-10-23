@@ -218,6 +218,9 @@ footer br { display: none; }
 .version-tag { font: 400 14px var(--mono); letter-spacing: -1px; vertical-align: top; display: inline-block; padding: 6px 9px; border: 1px solid #73efff40; background: var(--accent-soft); border-radius: 4px; margin: 14px 0 0 14px; }
 .mach-tagline { font: 400 clamp(22px, 3vw, 32px) var(--display); letter-spacing: -.8px; margin-bottom: 25px; }
 .page-machctrl .hero .lead { margin-inline: auto; max-width: 640px; font-size: 12px; }
+.mach-download { display: flex; justify-content: center; margin-bottom: 25px; }
+.mach-download .btn span { font: inherit; }
+.mach-download .line-icon { width: 16px; height: 16px; }
 .tech-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .tech-chip { font: 400 9px var(--mono); color: var(--text-muted); border: 1px solid var(--border-strong); border-radius: 3px; padding: 7px 12px; }
 .mach-preview { max-width: 1040px; padding: 10px 10px 0; background: #142345; border: 1px solid #73efff33; border-radius: 10px; box-shadow: 0 35px 100px #0005; }
