@@ -224,7 +224,7 @@
           <div class="step-num">6</div>
           <div>
             <h4 data-i18n="i040">ISO final</h4>
-            <p data-i18n="i041">Gera arquivos de otimização pós-instalação, configura makepkg.conf, nomeia a ISO como Covenant-CachyOS-&lt;data&gt;-&lt;sufixo&gt; e builda com retry automático (3×).</p>
+            <p data-i18n="i041">Gera arquivos de otimização pós-instalação, configura makepkg.conf, nomeia a ISO como Covenant-CachyOS-&lt;data&gt;-&lt;sufixo&gt;, builda com retry automático (3×) e gera checksum SHA256 da imagem.</p>
           </div>
         </div>
       </div>
@@ -255,16 +255,16 @@
 
       <div class="opt-panel active reveal-up delay-3" id="panel-cpu">
         <ul class="opt-list">
-          <li><span data-i18n="i053">Governor <strong>performance</strong> em todos os núcleos (também via <code>covenant-cpu-governor.service</code>)</span></li>
-          <li><span data-i18n="i054">GPU forçada para <code>power_dpm_force_performance_level=high</code></span></li>
-          <li><span data-i18n="i055">Kernel cmdline: <code>mitigations=off</code>, <code>processor.max_cstate=1</code>, <code>intel_idle.max_cstate=1</code>, <code>transparent_hugepage=always</code>, <code>nowatchdog</code>, <code>amdgpu.ppfeaturemask=0xffffffff</code>, <code>amd_pstate=active</code></span></li>
+          <li><span data-i18n="i053">Detecção dinâmica: governor <strong>performance</strong> em Desktops; governor adaptativo e EPP <strong>balance_performance</strong> com C-States liberados em Laptops/Bateria (via <code>covenant-cpu-governor.service</code>)</span></li>
+          <li><span data-i18n="i054">GPU forçada para <code>power_dpm_force_performance_level=high</code> e <code>power_dpm_state=performance</code></span></li>
+          <li><span data-i18n="i055">Kernel cmdline: <code>mitigations=off</code>, <code>transparent_hugepage=madvise</code> (elimina micro-stutter em jogos), <code>nowatchdog</code>, <code>amd_pstate=active</code> (e <code>max_cstate=1</code> condicional para desktops)</span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-rede">
         <ul class="opt-list">
           <li><span data-i18n="i056">TCP <strong>BBR</strong> + <code>fq_pie</code> como qdisc padrão</span></li>
-          <li><span data-i18n="i057">Buffers aumentados: <code>rmem_max</code>/<code>wmem_max</code> em 128 MB, <code>optmem_max=65536</code>, <code>somaxconn=8192</code>, <code>netdev_max_backlog=16384</code></span></li>
+          <li><span data-i18n="i057">Buffers calibrados contra bufferbloat: <code>rmem_max</code>/<code>wmem_max</code> em 32 MB (sem picos de ping em jogos), <code>optmem_max=65536</code>, <code>somaxconn=8192</code>, <code>netdev_max_backlog=16384</code></span></li>
           <li><span data-i18n="i058"><code>tcp_timestamps=0</code>, <code>tcp_slow_start_after_idle=0</code>, <code>tcp_fin_timeout=15</code></span></li>
           <li><span data-i18n="i059"><code>tcp_fastopen=3</code> — Fast Open em cliente e servidor</span></li>
           <li><span data-i18n="i060"><code>tcp_mtu_probing=1</code> — MTU Path Discovery automático</span></li>
@@ -321,7 +321,7 @@
         <ul class="opt-list">
           <li><span data-i18n="i082"><strong>Journald:</strong> persistente, comprimido, 256 MB / 1 semana. Coredumps desativados</span></li>
           <li><span data-i18n="i083"><strong>makepkg:</strong> <code>MAKEFLAGS="-j$(nproc)"</code>, <code>CFLAGS="-march=native"</code>, <code>RUSTFLAGS="-C target-cpu=native"</code></span></li>
-          <li><span data-i18n="i084"><strong>Polkit:</strong> montagem/desmontagem sem senha para grupo wheel</span></li>
+          <li><span data-i18n="i084"><strong>Polkit:</strong> montagem de discos e controle de hardware do MachCtrl sem senha para o grupo wheel</span></li>
           <li><span data-i18n="i085"><strong>Limites:</strong> nofile e memlock elevados; inotify 524288 watches</span></li>
           <li><span data-i18n="i086"><strong>Verificação:</strong> <code>covenant-check.sh</code> mostra o status de todas as otimizações</span></li>
         </ul>
