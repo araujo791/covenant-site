@@ -47,16 +47,12 @@
       <h1 data-i18n="d_hero">Seu hardware.<br>Seu potencial.<br><span>Sem limites.</span></h1>
 
 
-      <p data-i18n="i008" class="lead">
-        Builder de ISO customizada do CachyOS (Desktop/Plasma), com branding próprio
-        e otimizações de performance. A maior parte das otimizações usa
-        <strong style="color: var(--text)">detecção automática de hardware</strong>
-        — funcionam em qualquer máquina.
-      </p>
+      <p data-i18n="i008" class="lead">Builder de ISO customizada do CachyOS com branding Covenant, Plasma/KDE e Hyprland. As otimizações usam <strong style="color: var(--text)">detecção automática de hardware</strong> e são aplicadas no sistema instalado, no primeiro boot.</p>
 
       <div class="hero-actions">
         <a data-i18n="d_download" href="https://drive.google.com/file/d/1F70awzxuk4bHnjtIM75ulhdrQN4G6muO/view?usp=sharing" id="btn-download" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download da ISO <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
         <a data-i18n="i010" href="#uso" class="btn btn-ghost">Como usar <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+        <a data-i18n="b_readme" href="https://github.com/araujo791/Covenant-CachyOs-Builder#readme" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">README no GitHub <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
 
       </div>
 
@@ -94,7 +90,7 @@
           <div data-i18n="i012" class="stat-label">slides de branding</div>
         </div>
         <div class="stat reveal-up delay-1">
-          <div class="stat-num"><span data-count="8">8</span></div>
+          <div class="stat-num"><span data-count="9">9</span></div>
           <div data-i18n="i013" class="stat-label">categorias de otimização</div>
         </div>
         <div class="stat reveal-up delay-2">
@@ -163,6 +159,15 @@
         <div class="code-body"><code>cachyos-live-iso/out/desktop/<span class="code-path">Covenant-CachyOS-*.iso</span></code></div>
       </div>
 
+      <div class="docs-checksum">
+      <div data-i18n="b_checksum_label" class="code-label">Conferir a integridade da ISO (SHA256)</div>
+      <div class="code-block">
+        <div class="code-head"><i></i><i></i><i></i></div>
+        <button class="copy-btn" data-i18n="i020" data-copy="cd cachyos-live-iso/out/desktop &amp;&amp; sha256sum -c Covenant-CachyOS-*.iso.sha256">Copiar</button>
+        <div class="code-body"><code>cd cachyos-live-iso/out/desktop &amp;&amp; sha256sum -c Covenant-CachyOS-*.iso.sha256</code></div>
+      </div>
+      </div>
+
       <div data-i18n="i024" class="code-label reveal-up delay-2">Gravar no pendrive</div>
       <div class="code-block reveal-up delay-2">
         <div class="code-head"><i></i><i></i><i></i></div>
@@ -170,9 +175,7 @@
         <div class="code-body"><code><span class="code-cmd">sudo dd</span> if=<span class="code-path">'&lt;iso&gt;'</span> of=<span class="code-path">/dev/sdX</span> bs=4M status=progress oflag=sync</code></div>
       </div>
 
-      <div data-i18n="i026" class="note reveal-up delay-3">
-        <strong>Nota:</strong> Esta versão é uma build <em>incremental e isolada</em> — começou 100% pura e cada customização foi reintroduzida e testada separadamente, para facilitar o diagnóstico (especialmente problemas de GPU/Wayland).
-      </div>
+      <div data-i18n="i026" class="note reveal-up delay-3"><strong>Live e sistema instalado:</strong> <code>packages.x86_64</code> define apenas os pacotes do live. A instalação online usa <code>netinstall.yaml</code>; MachCtrl e Pamac são instalados por <code>covenant-post-install.sh</code> no primeiro boot.</div>
     </div>
   </section>
 
@@ -203,21 +206,21 @@
           <div class="step-num">3</div>
           <div>
             <h4 data-i18n="i034">Pacotes e branding</h4>
-            <p data-i18n="i035">Substitui a lista de pacotes, aplica branding Covenant (10 slides PNG), copia wallpapers e limpa o instalador para oferecer só Plasma e Hyprland.</p>
+            <p data-i18n="i035">Aplica a lista enxuta do live, 10 slides Covenant e 20 wallpapers no live e no sistema instalado. A seleção de desktops fica restrita a Plasma/KDE e Hyprland.</p>
           </div>
         </div>
         <div class="step reveal-up">
           <div class="step-num">4</div>
           <div>
             <h4 data-i18n="i036">Hooks de segurança</h4>
-            <p data-i18n="i037">Cria hook do pacman que reaplica branding se o pacote for reinstalado. Adiciona IgnorePkg para cachyos-calamares-next. Injeta covenant-target-setup sem sobrescrever o upstream.</p>
+            <p data-i18n="i037">Reaplica o branding via hook e antes de iniciar o Calamares. O live bloqueia a reinstalação dos pacotes Calamares com IgnorePkg. O covenant-target-setup preserva o arquivo upstream.</p>
           </div>
         </div>
         <div class="step reveal-up">
           <div class="step-num">5</div>
           <div>
             <h4 data-i18n="i038">MachCtrl + auto-correção</h4>
-            <p data-i18n="i039">Builda machctrl-bin a partir do AUR e embute na ISO. Verifica com ldd se o Calamares carrega todas as libs; se não, corrige boost-libs automaticamente via Arch Linux Archive.</p>
+            <p data-i18n="i039">Compila machctrl-bin com makepkg, cria um repositório pacman local e embute o pacote na ISO. Verifica as bibliotecas do Calamares com ldd e tenta corrigir o boost-libs via Arch Linux Archive.</p>
           </div>
         </div>
         <div class="step reveal-up">
@@ -236,50 +239,51 @@
     <div class="container">
       <div data-section="03" data-i18n="i042" class="section-label reveal-up">Performance</div>
       <h2 data-i18n="i043" class="section-title reveal-up delay-1">Otimizações pós-instalação</h2>
-      <p data-i18n="i044" class="section-desc reveal-up delay-2">
-        Rodam <strong style="color: var(--text)">apenas no sistema instalado</strong>, uma única vez no primeiro boot
-        (<code>covenant-first-boot.service</code>).
-        Nunca na sessão live.
-      </p>
+      <p data-i18n="i044" class="section-desc reveal-up delay-2">Rodam <strong style="color: var(--text)">apenas no sistema instalado</strong>, uma vez no primeiro boot, via <code>covenant-first-boot.service</code>. O marcador <code>/var/lib/covenant-setup-done</code> impede a repetição. Nunca na sessão live.</p>
 
       <div class="opt-tabs reveal-up delay-3" id="optTabs">
-        <button data-i18n="i045" class="opt-tab active" data-tab="cpu">CPU</button>
+        <button data-i18n="i045" class="opt-tab active" data-tab="cpu">CPU / GPU</button>
         <button data-i18n="i046" class="opt-tab" data-tab="rede">Rede</button>
-        <button data-i18n="i047" class="opt-tab" data-tab="memoria">Memória</button>
+        <button data-i18n="i047" class="opt-tab" data-tab="memoria">Memória / ZRAM</button>
         <button data-i18n="i048" class="opt-tab" data-tab="io">I/O</button>
         <button data-i18n="i049" class="opt-tab" data-tab="irq">IRQ</button>
         <button data-i18n="i050" class="opt-tab" data-tab="fs">Filesystem</button>
-        <button data-i18n="i051" class="opt-tab" data-tab="kernel">Kernel</button>
+        <button data-i18n="b_audio_tab" class="opt-tab" data-tab="audio">Áudio / Desktop</button>
+        <button data-i18n="i051" class="opt-tab" data-tab="kernel">Kernel / scx</button>
         <button data-i18n="i052" class="opt-tab" data-tab="outros">Outros</button>
       </div>
 
       <div class="opt-panel active reveal-up delay-3" id="panel-cpu">
         <ul class="opt-list">
-          <li><span data-i18n="i053">Detecção dinâmica: governor <strong>performance</strong> em Desktops; governor adaptativo e EPP <strong>balance_performance</strong> com C-States liberados em Laptops/Bateria (via <code>covenant-cpu-governor.service</code>)</span></li>
-          <li><span data-i18n="i054">GPU forçada para <code>power_dpm_force_performance_level=high</code> e <code>power_dpm_state=performance</code></span></li>
-          <li><span data-i18n="i055">Kernel cmdline: <code>mitigations=off</code>, <code>transparent_hugepage=madvise</code> (elimina micro-stutter em jogos), <code>nowatchdog</code>, <code>amd_pstate=active</code> (e <code>max_cstate=1</code> condicional para desktops)</span></li>
+          <li><span data-i18n="i053"><strong>Desktop:</strong> governor e EPP <code>performance</code>. <strong>Notebook:</strong> governor adaptativo <code>powersave</code>/<code>schedutil</code>, EPP <code>balance_performance</code> e C-States liberados.</span></li>
+          <li><span data-i18n="i054">iGPU e dGPU em alto rendimento: <code>power_dpm_force_performance_level=high</code> e <code>power_dpm_state=performance</code>, inclusive em notebooks.</span></li>
+          <li><span data-i18n="i055">Intel Turbo Boost liberado com <code>no_turbo=0</code>. O perfil de Turbo e GPU também é aplicado quando a máquina está na bateria.</span></li>
+          <li><span data-i18n="b_cpu_service"><code>covenant-cpu-governor.service</code> reaplica o perfil a cada boot; a detecção de notebook usa bateria em <code>/sys/class/power_supply/BAT*</code> e o tipo de chassi DMI.</span></li>
+          <li><span data-i18n="b_nvidia">NVIDIA Persistence Mode: <code>nvidia-smi -pm 1</code>, se os drivers proprietários estiverem presentes.</span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-rede">
         <ul class="opt-list">
-          <li><span data-i18n="i056">TCP <strong>BBR</strong> + <code>fq_pie</code> como qdisc padrão</span></li>
-          <li><span data-i18n="i057">Buffers calibrados contra bufferbloat: <code>rmem_max</code>/<code>wmem_max</code> em 32 MB (sem picos de ping em jogos), <code>optmem_max=65536</code>, <code>somaxconn=8192</code>, <code>netdev_max_backlog=16384</code></span></li>
-          <li><span data-i18n="i058"><code>tcp_timestamps=0</code>, <code>tcp_slow_start_after_idle=0</code>, <code>tcp_fin_timeout=15</code></span></li>
+          <li><span data-i18n="i056">TCP <strong>BBR</strong> + <code>fq</code> como qdisc padrão, com packet pacing para o BBRv3.</span></li>
+          <li><span data-i18n="i057">Buffers contra bufferbloat: <code>rmem_max</code>/<code>wmem_max</code> em 32 MB (<code>33554432</code>), <code>optmem_max=65536</code>, <code>somaxconn=8192</code> e <code>netdev_max_backlog=16384</code>.</span></li>
+          <li><span data-i18n="i058"><code>tcp_timestamps=0</code>, <code>tcp_slow_start_after_idle=0</code> e <code>tcp_fin_timeout=10</code>.</span></li>
           <li><span data-i18n="i059"><code>tcp_fastopen=3</code> — Fast Open em cliente e servidor</span></li>
           <li><span data-i18n="i060"><code>tcp_mtu_probing=1</code> — MTU Path Discovery automático</span></li>
           <li><span data-i18n="i061">Módulo <code>tcp_bbr</code> carregado no boot</span></li>
+          <li><span data-i18n="b_network_extra"><code>tcp_notsent_lowat=16384</code> para reduzir enfileiramento; <code>tcp_syncookies=1</code> e <code>tcp_tw_reuse=1</code>.</span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-memoria">
         <ul class="opt-list">
-          <li><span data-i18n="i062"><code>swappiness=10</code>, <code>vfs_cache_pressure=50</code></span></li>
-          <li><span data-i18n="i063"><code>page-cluster=0</code> — sem readahead de swap</span></li>
-          <li><span data-i18n="i064"><code>compaction_proactiveness=0</code> — sem compactação proativa</span></li>
-          <li><span data-i18n="i065">Huge Pages: 512 páginas de 2 MB</span></li>
-          <li><span data-i18n="i066">ZRAM desativado (mascarado via systemd)</span></li>
-          <li><span data-i18n="i067">Dirty pages: <code>dirty_ratio=20</code>, <code>dirty_background_ratio=10</code></span></li>
+          <li><span data-i18n="i062"><code>swappiness=100</code> e <code>vfs_cache_pressure=50</code>, ajustados para o uso de ZRAM.</span></li>
+          <li><span data-i18n="i063"><code>page-cluster=0</code> — sem readahead agressivo de swap, adequado à ZRAM.</span></li>
+          <li><span data-i18n="i064"><code>compaction_proactiveness=20</code> e defrag de THP não bloqueante com <code>defer+madvise</code>.</span></li>
+          <li><span data-i18n="i065">Huge Pages de 2 MB conforme a RAM: 1024 páginas com ≥32 GB; 512 com ≥16 GB; abaixo de 16 GB, THP sob demanda sem reserva fixa.</span></li>
+          <li><span data-i18n="i066"><strong>ZRAM com zstd:</strong> swap comprimido em RAM, com tamanho de aproximadamente metade da RAM e teto de 16 GB.</span></li>
+          <li><span data-i18n="i067">Dirty pacing por bytes: <code>dirty_bytes=268435456</code> (256 MB), <code>dirty_background_bytes=134217728</code> (128 MB) e intervalos de 500/1000 cs.</span></li>
+          <li><span data-i18n="b_max_map"><code>vm.max_map_count=2147483642</code> para jogos e Steam Proton.</span></li>
         </ul>
       </div>
 
@@ -290,28 +294,47 @@
           <li><span data-i18n="i070"><strong>HDD:</strong> <code>bfq</code>, <code>read_ahead_kb=2048</code> + hdparm <code>-B 255</code> / <code>-S 0</code></span></li>
           <li><span data-i18n="i071">Regras udev com prefixo <code>99-</code> (sobrescrevem defaults da CachyOS)</span></li>
           <li><span data-i18n="i072"><code>fstrim.timer</code> habilitado</span></li>
+          <li><span data-i18n="b_hdparm">HDDs com <code>hdparm -B 255</code> e <code>-S 0</code>, persistidos em <code>69-covenant-hdparm.rules</code>.</span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-irq">
         <ul class="opt-list">
-          <li><span data-i18n="i073">IRQs de NVMe e AMD GPU direcionadas para a metade dos cores lógicos disponíveis</span></li>
-          <li><span data-i18n="i074">Serviço <code>covenant-irq-affinity.service</code></span></li>
+          <li><span data-i18n="i073">IRQs de NVMe, GPUs AMD/NVIDIA/Intel, Ethernet e WiFi fixadas na primeira metade dos núcleos disponíveis.</span></li>
+          <li><span data-i18n="i074"><code>covenant-irq-affinity.service</code> aplica as afinidades. O <code>irqbalance.service</code> é parado e mascarado para preservá-las.</span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-fs">
         <ul class="opt-list">
+          <li><span data-i18n="b_btrfs"><strong>Btrfs:</strong> <code>noatime</code>, <code>space_cache=v2</code>, <code>compress=zstd:1</code> e <code>discard=async</code>.</span></li>
+          <li><span data-i18n="b_ext4"><strong>Ext4:</strong> <code>noatime</code> e <code>commit=60</code> para intervalo de flushing de 60 segundos.</span></li>
           <li><span data-i18n="i075"><strong>F2FS:</strong> <code>noatime</code>, <code>nodiscard</code>, <code>compress_algorithm=lz4</code>, <code>lazytime</code></span></li>
           <li><span data-i18n="i076"><strong>XFS:</strong> <code>noatime</code>, <code>nodiscard</code>, <code>logbsize=256k</code>, <code>allocsize=64m</code></span></li>
-          <li><span data-i18n="i077">Backup automático do <code>/etc/fstab</code> antes de qualquer alteração</span></li>
+          <li><span data-i18n="i077">Backup de <code>/etc/fstab</code> em <code>fstab.covenant-backup</code> antes das alterações.</span></li>
+        </ul>
+      </div>
+
+      <div class="opt-panel" id="panel-audio">
+        <ul class="opt-list">
+          <li><span data-i18n="b_pipewire"><strong>PipeWire:</strong> 48 kHz, quantum dinâmico de 64 a 1024 amostras, em <code>99-covenant-lowlatency.conf</code>.</span></li>
+          <li><span data-i18n="b_kwin"><strong>KWin / KDE Wayland:</strong> <code>LatencyPolicy=Lower</code> e <code>GLCore=true</code> em <code>/etc/xdg/kwinrc</code>. Preferências do usuário em <code>~/.config/kwinrc</code> prevalecem.</span></li>
+          <li><span data-i18n="b_shaders"><strong>Shaders:</strong> <code>MESA_SHADER_CACHE_MAX_SIZE=50G</code>, <code>__GL_SHADER_DISK_CACHE_SIZE=53687091200</code> e <code>RADV_PERFTEST=aco</code> em <code>/etc/environment</code>.</span></li>
+          <li><span data-i18n="b_baloo"><strong>Baloo:</strong> indexação apenas básica, configurada em <code>/etc/xdg/baloofilerc</code>.</span></li>
+          <li><span data-i18n="b_ananicy"><strong>ananicy-cpp + cachyos-ananicy-rules:</strong> daemon de auto-nice habilitado para priorizar CPU e I/O de jogos e janelas em primeiro plano.</span></li>
         </ul>
       </div>
 
       <div class="opt-panel" id="panel-kernel">
         <ul class="opt-list">
-          <li><span data-i18n="i078"><code>sched_autogroup_enable=0</code> — melhor throughput em workloads pesados</span></li>
-          <li><span data-i18n="i079"><code>nmi_watchdog=0</code> — dupla garantia com <code>nowatchdog</code> no GRUB</span></li>
+          <li><span data-i18n="b_bootloaders">Merge de parâmetros em <strong>GRUB e systemd-boot</strong>, preservando opções existentes como <code>quiet</code> e <code>splash</code>.</span></li>
+          <li><span data-i18n="b_cmdline"><code>mitigations=off</code>, <code>transparent_hugepage=madvise</code>, <code>nowatchdog</code>, <code>amdgpu.ppfeaturemask=0xffffffff</code> e <code>amd_pstate=active</code>.</span></li>
+          <li><span data-i18n="b_kernel_latency">Latência e temporização: <code>split_lock_detect=off</code>, <code>preempt=full</code>, <code>tsc=reliable</code>, <code>clocksource=tsc</code> e <code>skew_tick=1</code>.</span></li>
+          <li><span data-i18n="b_cstates">Somente desktops recebem <code>processor.max_cstate=1</code> e <code>intel_idle.max_cstate=1</code>; notebooks mantêm C-States livres.</span></li>
+          <li><span data-i18n="b_scx"><strong>scx_loader:</strong> seleciona <code>scx_rusty</code> quando há ≥2 nós NUMA e <code>scx_lavd</code> em desktops comuns de alto desempenho/jogos.</span></li>
+          <li><span data-i18n="b_sched_slice"><code>kernel.sched_cfs_bandwidth_slice_us=3000</code> para fatias menores de escalonamento.</span></li>
+          <li><span data-i18n="i078"><code>sched_autogroup_enabled=1</code> — isolamento dinâmico de grupos de tarefas no desktop. ISOs antigas podem ter o valor 0.</span></li>
+          <li><span data-i18n="i079"><code>nmi_watchdog=0</code> junto de <code>nowatchdog</code> nos parâmetros de boot.</span></li>
           <li><span data-i18n="i080"><code>perf_event_paranoid=-1</code> + <code>kptr_restrict=0</code> — profiling sem root</span></li>
           <li><span data-i18n="i081"><code>unprivileged_userns_clone=1</code> — Flatpak, containers rootless e Chromium sandbox</span></li>
         </ul>
@@ -319,12 +342,23 @@
 
       <div class="opt-panel" id="panel-outros">
         <ul class="opt-list">
-          <li><span data-i18n="i082"><strong>Journald:</strong> persistente, comprimido, 256 MB / 1 semana. Coredumps desativados</span></li>
+          <li><span data-i18n="i082"><strong>Journald:</strong> persistente, comprimido, teto de 256 MB, arquivos de 32 MB e retenção de 1 semana. Coredumps com <code>Storage=none</code>.</span></li>
           <li><span data-i18n="i083"><strong>makepkg:</strong> <code>MAKEFLAGS="-j$(nproc)"</code>, <code>CFLAGS="-march=native"</code>, <code>RUSTFLAGS="-C target-cpu=native"</code></span></li>
-          <li><span data-i18n="i084"><strong>Polkit:</strong> montagem de discos e controle de hardware do MachCtrl sem senha para o grupo wheel</span></li>
-          <li><span data-i18n="i085"><strong>Limites:</strong> nofile e memlock elevados; inotify 524288 watches</span></li>
-          <li><span data-i18n="i086"><strong>Verificação:</strong> <code>covenant-check.sh</code> mostra o status de todas as otimizações</span></li>
+          <li><span data-i18n="i084"><strong>Polkit:</strong> grupo <code>wheel</code> monta discos, desbloqueia volumes criptografados e ejeta mídia sem senha. Permissões do MachCtrl para governors, GPU e ventoinhas evitam prompts contínuos de root.</span></li>
+          <li><span data-i18n="i085"><strong>Limites:</strong> <code>nofile</code> e <code>memlock</code> elevados; <code>inotify.max_user_watches=524288</code> e <code>max_user_instances=1024</code>.</span></li>
+          <li><span data-i18n="i086"><strong>Verificação:</strong> <code>sudo covenant-check.sh</code> audita governor, EPP, boot, rede, discos, IRQs, áudio, ananicy, polkit e outros ajustes.</span></li>
+          <li><span data-i18n="b_systemd"><strong>Systemd:</strong> <code>RuntimeWatchdogSec=0</code>, <code>DefaultTimeoutStopSec=10s</code> e <code>DefaultTimeoutStartSec=15s</code>. Serviços sem timeout próprio podem ser interrompidos após 15 s; o primeiro boot declara 900 s.</span></li>
+          <li><span data-i18n="b_bluetooth"><strong>Bluetooth:</strong> <code>bluetooth.service</code> é habilitado no primeiro boot se <code>bluez</code> estiver instalado.</span></li>
         </ul>
+      </div>
+      <div class="note" data-i18n="b_tradeoffs"><strong>Consumo e proteção:</strong> a distinção desktop/notebook vale para governor, EPP e C-States. Turbo Intel e perfil alto das GPUs também são aplicados em bateria, aumentando consumo e temperatura. <code>mitigations=off</code> reduz a proteção contra vulnerabilidades da CPU.</div>
+      <div class="docs-audit">
+      <div data-i18n="b_audit_label" class="code-label">Verificar as otimizações após reiniciar no sistema instalado</div>
+      <div class="code-block">
+        <div class="code-head"><i></i><i></i><i></i></div>
+        <button class="copy-btn" data-i18n="i020" data-copy="sudo covenant-check.sh">Copiar</button>
+        <div class="code-body"><code><span class="code-cmd">sudo</span> covenant-check.sh</code></div>
+      </div>
       </div>
     </div>
   </section>
@@ -372,11 +406,7 @@
         </div>
       </div>
 
-      <div data-i18n="i102" class="note reveal-up">
-        <strong>Defesa em camadas:</strong> patch no calamares-online.sh (não reinstala), IgnorePkg no pacman.conf do live,
-        e hook de reaplicação de branding fora de /etc/calamares/. Além disso, auto-correção de mismatch do boost-libs
-        via Arch Linux Archive — se o ldd detectar lib faltando, baixa e instala a versão exata.
-      </div>
+      <div data-i18n="i102" class="note reveal-up"><strong>Defesa em camadas:</strong> o launcher atualiza o keyring sem reinstalar o Calamares. IgnorePkg protege os pacotes do instalador; o hook reaplica o branding antes do exec. O reparo do boost-libs consulta o Arch Linux Archive e fixa a versão no live; se não conseguir baixar, o build só avisa e continua.</div>
     </div>
   </section>
 
@@ -390,19 +420,13 @@
       <div class="grid grid-2" style="margin-bottom: 60px;">
         <div class="card product-card reveal-up delay-1">
           <div class="product-identity"><img src="images/favicon.png" alt="Logo MachCtrl" class="product-logo" width="500" height="500" loading="lazy" /><div><span class="product-eyebrow" data-i18n="d_native_tool">Controle de hardware</span><h3 data-i18n="i106">MachCtrl 3.0</h3></div></div>
-          <p data-i18n="i107">
-            Monitor e otimizador de hardware nativo para CachyOS. Buildado a partir do AUR durante o build da ISO
-            e embutido nela. Instalado via pacman -U no primeiro boot, sem internet ou AUR helper.
-          </p>
+          <p data-i18n="i107">Monitor e otimizador nativo para CachyOS, compilado do AUR e embutido na ISO. O primeiro boot instala o pacote local via pacman -U e o remove após sucesso. Em caso de falha, ele permanece em /usr/local/share/covenant-target-files/ para instalação manual.</p>
           <a data-i18n="i108" href="machctrl.html" class="btn btn-primary" style="margin-top: 18px; padding: 9px 18px; font-size: 0.85rem;">Ver prints e detalhes →</a>
         </div>
         <div class="card tilt reveal-up delay-2">
           <div class="card-icon cyan" data-icon="box">📦</div>
           <h3 data-i18n="i109">Pamac</h3>
-          <p data-i18n="i110">
-            Gerenciador gráfico de pacotes com suporte a AUR, do repositório oficial do CachyOS.
-            Instalado no primeiro boot junto com o MachCtrl, após confirmar resolução DNS.
-          </p>
+          <p data-i18n="i110">Gerenciador gráfico com suporte a AUR, do repositório oficial do CachyOS. O pós-instalação aguarda DNS, sincroniza os bancos e instala o Pamac. Após 5 minutos sem rede, registra no log os comandos manuais para instalar Pamac e MachCtrl.</p>
         </div>
       </div>
 
@@ -411,7 +435,7 @@
       <div class="grid grid-3">
         <div class="card tilt reveal-up delay-1">
           <h3 data-i18n="i113">Documentação</h3>
-          <p data-i18n="i114">Remove /usr/share/doc, man, info e gtk-doc.</p>
+          <p data-i18n="i114">Limpeza apenas no chroot: documentação, fontes CJK, temas de ícones extras, cache de pacotes e logs. Preserva breeze, hicolor, Adwaita e cursores.</p>
         </div>
         <div class="card tilt reveal-up delay-2">
           <h3 data-i18n="i115">Locales</h3>
@@ -422,6 +446,7 @@
           <p data-i18n="i118">Remove NICs enterprise/datacenter. Preserva WiFi e Bluetooth.</p>
         </div>
       </div>
+      <div class="note docs-packages"><strong data-i18n="b_packages_title">O que permanece no live</strong><p data-i18n="b_packages_body">WiFi e Bluetooth (iwd, wpa_supplicant, bluez), impressão básica em rede e ferramentas de máquinas virtuais são preservados. scx-scheds, scx-tools, ananicy-cpp e zram-generator entram no live; a configuração e a ativação ocorrem no primeiro boot do sistema instalado. A lista do live não inclui pacotes NVIDIA nem ZFS.</p></div>
     </div>
   </section>
 
@@ -430,11 +455,7 @@
     <div class="container">
       <div class="status-box reveal-up">
         <h3 data-i18n="i119">Em desenvolvimento ativo</h3>
-        <p data-i18n="i120">
-          Instalação online testada e funcional em hardware real — todas as otimizações,
-          MachCtrl, Pamac e a correção automática do mismatch boost-libs/Calamares
-          confirmados de ponta a ponta (build → live → instalação → primeiro boot).
-        </p>
+        <p data-i18n="i120">Segundo o README, a instalação online, MachCtrl, Pamac e o reparo de boost-libs/Calamares foram validados em hardware real. A rodada de outubro de 2026 — perfis dinâmicos, scx_loader, ZRAM, dirty pacing, KWin, shaders, systemd e IRQs — entrou depois dessa validação. Confira os itens após instalar uma ISO nova com sudo covenant-check.sh.</p>
       </div>
     </div>
   </section>
@@ -443,7 +464,7 @@
   <footer>
     <div class="container">
       <a class="footer-brand" href="index.html"><img src="images/covenant-machctrl-logo.png" alt="Covenant — MachCtrl" width="2172" height="724" loading="lazy" /><span>CACHYOS BUILDER</span></a>
-      <span data-i18n="i122">build incremental e isolada</span>
+      <span data-i18n="i122">Documentação do Covenant CachyOS Builder</span>
     </div>
   </footer>
 

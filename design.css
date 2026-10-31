@@ -158,6 +158,10 @@ section { padding: 105px 0; border-bottom: 1px solid var(--border); }
 .card-icon { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #73efff22; border-radius: 7px; font-size: 17px; margin-bottom: 25px; color: var(--accent); background: var(--accent-soft); }
 .product-card { overflow: hidden; }
 .code-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.3px; font: 400 9px var(--mono); margin-bottom: 12px; }
+.docs-checksum { margin-bottom: 28px; }
+.docs-audit { margin-top: 28px; }
+.docs-checksum .code-label, .docs-audit .code-label { line-height: 1.8; }
+.docs-packages > strong { display: block; margin-bottom: 8px; }
 .code-block { position: relative; border: 1px solid var(--border); border-radius: 6px; background: #060c1b; overflow: hidden; }
 .code-head { display: flex; align-items: center; gap: 5px; padding: 12px 18px; border-bottom: 1px solid var(--border); background: #ffffff02; }
 .code-head::after { content: 'terminal'; margin-left: auto; font: 400 8px var(--mono); color: var(--text-dim); }
