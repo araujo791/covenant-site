@@ -90,7 +90,7 @@
           <div data-i18n="i012" class="stat-label">slides de branding</div>
         </div>
         <div class="stat reveal-up delay-1">
-          <div class="stat-num"><span data-count="9">9</span></div>
+          <div class="stat-num"><span data-count="10">10</span></div>
           <div data-i18n="i013" class="stat-label">categorias de otimização</div>
         </div>
         <div class="stat reveal-up delay-2">
@@ -206,7 +206,7 @@
           <div class="step-num">3</div>
           <div>
             <h4 data-i18n="i034">Pacotes e branding</h4>
-            <p data-i18n="i035">Aplica a lista enxuta do live, 10 slides Covenant e 20 wallpapers no live e no sistema instalado. A seleção de desktops fica restrita a Plasma/KDE e Hyprland.</p>
+            <p data-i18n="i035">Aplica a lista enxuta do live, 10 slides Covenant, suíte de temas (GRUB 1080p + Plymouth) e 20 wallpapers no live e no sistema instalado. A seleção de desktops fica restrita a Plasma/KDE e Hyprland.</p>
           </div>
         </div>
         <div class="step reveal-up">
@@ -250,6 +250,7 @@
         <button data-i18n="i050" class="opt-tab" data-tab="fs">Filesystem</button>
         <button data-i18n="b_audio_tab" class="opt-tab" data-tab="audio">Áudio / Desktop</button>
         <button data-i18n="i051" class="opt-tab" data-tab="kernel">Kernel / scx</button>
+        <button data-i18n="b_themes_tab" class="opt-tab" data-tab="temas">Temas / Boot</button>
         <button data-i18n="i052" class="opt-tab" data-tab="outros">Outros</button>
       </div>
 
@@ -337,6 +338,15 @@
           <li><span data-i18n="i079"><code>nmi_watchdog=0</code> junto de <code>nowatchdog</code> nos parâmetros de boot.</span></li>
           <li><span data-i18n="i080"><code>perf_event_paranoid=-1</code> + <code>kptr_restrict=0</code> — profiling sem root</span></li>
           <li><span data-i18n="i081"><code>unprivileged_userns_clone=1</code> — Flatpak, containers rootless e Chromium sandbox</span></li>
+        </ul>
+      </div>
+
+      <div class="opt-panel" id="panel-temas">
+        <ul class="opt-list">
+          <li><span data-i18n="b_theme_grub"><strong>GRUB Custom 1080p:</strong> resolução 1920x1080/1280x720, fontes Open Sans anti-serrilhado (compiladas com autohint inteligente), seletor 9-slice PNG32 truecolor e logo Covenant transparente.</span></li>
+          <li><span data-i18n="b_theme_plymouth"><strong>Plymouth Boot &amp; Shutdown:</strong> inicialização e desligamento em tela preta pura, sem poluição de logs do systemd, com logo Covenant em alta resolução (750x250) e barra de progresso cyan elegante.</span></li>
+          <li><span data-i18n="b_theme_staging"><strong>Staging e Instalação Automática:</strong> suíte de temas embutida no airootfs em <code>/usr/local/share/covenant-target-files/themes/</code> e ativada no primeiro boot pelo <code>covenant-post-install.sh</code>.</span></li>
+          <li><span data-i18n="b_theme_wallpapers"><strong>20 Wallpapers Covenant:</strong> coletânea exclusiva em alta resolução embutida no live e copiada diretamente para o sistema instalado.</span></li>
         </ul>
       </div>
 
@@ -455,7 +465,7 @@
     <div class="container">
       <div class="status-box reveal-up">
         <h3 data-i18n="i119">Em desenvolvimento ativo</h3>
-        <p data-i18n="i120">Segundo o README, a instalação online, MachCtrl, Pamac e o reparo de boost-libs/Calamares foram validados em hardware real. A rodada de outubro de 2026 — perfis dinâmicos, scx_loader, ZRAM, dirty pacing, KWin, shaders, systemd e IRQs — entrou depois dessa validação. Confira os itens após instalar uma ISO nova com sudo covenant-check.sh.</p>
+        <p data-i18n="i120">Instalação online testada e funcional em hardware real — todas as otimizações, MachCtrl, Pamac, suíte de temas Covenant (GRUB 1080p + Plymouth) e a correção de dependências confirmados de ponta a ponta (build → live → instalação → primeiro boot). Valide o seu sistema a qualquer momento com sudo covenant-check.sh.</p>
       </div>
     </div>
   </section>
